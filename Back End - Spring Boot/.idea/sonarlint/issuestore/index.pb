@@ -1,6 +1,4 @@
 
-N
-Help Desk - BackEnd/.gitignore,c\7\c7fd614b7a4432409c19e6fd15dda39adeb5527c
 ‚
 RHelp Desk - BackEnd/src/test/java/com/backend/HelpDeskBackEndApplicationTests.java,a\8\a879cf29f4dc341849c98e4e272e79394eba1945
 i
@@ -19,12 +17,6 @@ w
 GHelp Desk - BackEnd/src/main/java/com/backend/entity/enums/Profile.java,7\f\7fea196ff00502dad63aeb8903333f608d360c86
 K
 Help Desk - BackEnd/pom.xml,2\4\246056d49ac4a6a83218086ae61fd0c2eddcdc25
-}
-MHelp Desk - BackEnd/src/main/java/com/backend/HelpDeskBackEndApplication.java,8\3\832d30bb6a5fcf0fb521e3d36b5962c755343c51
-‚
-RHelp Desk - BackEnd/src/main/java/com/backend/configuration/OpenConfiguration.java,a\0\a0d219bd2789035fb808cd2f3f9498188ac4b810
-‚
-RHelp Desk - BackEnd/src/main/java/com/backend/configuration/TestConfiguration.java,2\a\2a3c5e35c73e1871aa5d4116a117e9e080140a56
 p
 @Help Desk - BackEnd/src/main/java/com/backend/entity/Called.java,e\8\e8205966e724ae169d105a6b95c3c1a80dded03c
 p
