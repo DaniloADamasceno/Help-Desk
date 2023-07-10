@@ -11,7 +11,7 @@ import java.time.LocalDate;
 import java.util.Objects;
 
 @Entity(name = "chamados")
-public abstract class Called implements Serializable {
+public class Called implements Serializable {
 
     public static final long serialVersionUID = 1L;
 

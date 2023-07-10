@@ -19,6 +19,7 @@ public class HelpDeskBackEndApplication implements CommandLineRunner {
 		System.out.println("Desenvolvido por: Danilo A. Damasceno");
 		System.out.println("LinkedIn: https://www.linkedin.com/in/daniloadamasceno/");
 		System.out.println("GitHub: https://github.com/DaniloADamasceno");
+		System.out.println("Swagger: http://localhost:8080/swagger-ui.html");
 		System.out.println("✅ ✅");
 	}
 }

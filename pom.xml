@@ -38,11 +38,19 @@
 			<artifactId>spring-boot-starter-validation</artifactId>
 		</dependency>
 
+
 		<dependency>									<!-- DEVTOOLS -->
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-devtools</artifactId>
 			<scope>runtime</scope>
 			<optional>true</optional>
+		</dependency>
+
+
+		<dependency>   							  <!-- SWAGGER -->
+			<groupId>io.swagger.core.v3</groupId>
+			<artifactId>swagger-models</artifactId>
+			<version>2.1.12</version>
 		</dependency>
 
 		<dependency>									<!-- DATABASE H2 -->

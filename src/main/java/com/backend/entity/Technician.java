@@ -1,5 +1,7 @@
 package com.backend.entity;
 
+import com.backend.entity.enums.Profile;
+
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
 import java.io.Serializable;
@@ -17,10 +19,13 @@ public class Technician extends Person implements Serializable {
     //?--------------------------------------------------  Constructor  ------------------------------------------------
     public Technician() {
         super();
+        addProfile(Profile.CUSTOMER);                       //-> Adiciona o perfil de cliente para o técnico
     }
 
     public Technician(Integer id, String name, String cpf, String email, String password) {
         super(id, name, cpf, email, password);
+        addProfile(Profile.CUSTOMER);                      //-> Adiciona o perfil de cliente para o técnico
+
     }
 
 
