@@ -8,19 +8,18 @@ import com.backend.entity.enums.Profile;
 import com.backend.entity.enums.Status;
 import com.backend.repository.calledRepository;
 import com.backend.repository.clientRepository;
-import com.backend.repository.technicianRepository;
+import com.backend.repository.repositoryTechnician;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class DataBaseService {
 
-    //--------------------------------------------   INJECTIONS   ------------------------------------------------------
+    //?--------------------------------------------   INJECTIONS   -----------------------------------------------------
     @Autowired
-    private technicianRepository technicianRepository;
+    private repositoryTechnician technicianRepository;
 
     @Autowired
     private clientRepository clientRepository;
