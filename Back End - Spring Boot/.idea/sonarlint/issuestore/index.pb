@@ -11,8 +11,6 @@ v
 FHelp Desk - BackEnd/src/main/java/com/backend/entity/enums/Status.java,3\a\3a43a2640ada6705d30998fdebc28e639a60ade8
 x
 HHelp Desk - BackEnd/src/main/java/com/backend/entity/enums/Priority.java,2\1\219b6f9adb5741713a700f4dfd92e40498adb96f
-w
-GHelp Desk - BackEnd/src/main/java/com/backend/entity/enums/Profile.java,7\f\7fea196ff00502dad63aeb8903333f608d360c86
 p
 @Help Desk - BackEnd/src/main/java/com/backend/entity/Called.java,e\8\e8205966e724ae169d105a6b95c3c1a80dded03c
 p
@@ -37,7 +35,11 @@ QHelp Desk - BackEnd/src/main/java/com/backend/configuration/DevConfiguration.ja
 RHelp Desk - BackEnd/src/main/java/com/backend/configuration/TestConfiguration.java,2\a\2a3c5e35c73e1871aa5d4116a117e9e080140a56
 t
 DHelp Desk - BackEnd/src/main/java/com/backend/entity/Technician.java,2\3\23871107131df6e6f9b29cfed4977b635b570264
-p
-@Help Desk - BackEnd/src/main/java/com/backend/entity/Person.java,5\4\54c95cfb67b442853d15ca7bab70142cd6af06be
 ‚
 RHelp Desk - BackEnd/src/main/java/com/backend/configuration/OpenConfiguration.java,a\0\a0d219bd2789035fb808cd2f3f9498188ac4b810
+\
+,.idea/inspectionProfiles/Project_Default.xml,4\9\496a238a6afa168dbaf6efd37bb459331589579c
+z
+JHelp Desk - BackEnd/src/main/java/com/backend/service/DataBaseService.java,a\3\a3fb56dc215c143f09672baf5fdbbf0df8ff0ea9
+K
+Help Desk - BackEnd/pom.xml,2\4\246056d49ac4a6a83218086ae61fd0c2eddcdc25
