@@ -1,6 +1,7 @@
 package com.backend.resources;
 
 import com.backend.entity.Technician;
+import com.backend.entity.dto.TechnicianDTO;
 import com.backend.service.ServiceTechnician;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -42,10 +43,10 @@ public class TechnicianResources {
 
     //FIND BY ID
     @RequestMapping(value = "/{id}")
-    public ResponseEntity<Technician> findByIdTechnician(@PathVariable Integer id) {                   //  --> Busca por ID
+    public ResponseEntity<TechnicianDTO> findByIdTechnician(@PathVariable Integer id) {                   //  --> Busca por ID
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                 //--> para imprimir no console
         Technician technicianFindById = serviceTechnician.findById(id);
-        return ResponseEntity.ok(technicianFindById);
+        return ResponseEntity.ok( new TechnicianDTO(technicianFindById));
     }
 
     //FIND BY EMAIL
