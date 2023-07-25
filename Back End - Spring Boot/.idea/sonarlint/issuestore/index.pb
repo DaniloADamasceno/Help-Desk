@@ -41,5 +41,7 @@ RHelp Desk - BackEnd/src/main/java/com/backend/configuration/OpenConfiguration.j
 ,.idea/inspectionProfiles/Project_Default.xml,4\9\496a238a6afa168dbaf6efd37bb459331589579c
 z
 JHelp Desk - BackEnd/src/main/java/com/backend/service/DataBaseService.java,a\3\a3fb56dc215c143f09672baf5fdbbf0df8ff0ea9
-K
-Help Desk - BackEnd/pom.xml,2\4\246056d49ac4a6a83218086ae61fd0c2eddcdc25
+w
+GHelp Desk - BackEnd/src/main/java/com/backend/entity/enums/Profile.java,7\f\7fea196ff00502dad63aeb8903333f608d360c86
+p
+@Help Desk - BackEnd/src/main/java/com/backend/entity/Person.java,5\4\54c95cfb67b442853d15ca7bab70142cd6af06be
