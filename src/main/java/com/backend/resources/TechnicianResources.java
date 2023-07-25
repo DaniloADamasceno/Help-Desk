@@ -8,13 +8,12 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.backend.repository.repositoryTechnician;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -59,6 +58,16 @@ public class TechnicianResources {
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
         Technician technicianFindByEmail = serviceTechnician.findByEmail(email);
         return ResponseEntity.ok(technicianFindByEmail);
+    }
+
+    //CREATE
+    @PostMapping
+    public ResponseEntity<TechnicianDTO> create(@RequestBody TechnicianDTO createTechnicianDTO) {     //  --> Cria um Técnico
+        Technician newCreateTechnician = serviceTechnician.create(createTechnicianDTO);
+        logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newCreateTechnician.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+                //body(new TechnicianDTO(newCreateTechnician));
     }
 
 //    //FIND BY CPF

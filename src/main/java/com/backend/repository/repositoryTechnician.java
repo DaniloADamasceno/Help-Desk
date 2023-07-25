@@ -9,10 +9,7 @@ import java.util.Optional;
 @Repository
 public interface repositoryTechnician extends JpaRepository<Technician, String> {
 
-
-   // Optional<Technician> findById(Integer id);             //--> Busca por ID
     Optional<Technician> findByEmail(String email);       //--> Busca por EMAIL
-    //Optional<Technician> findByCPF(String cpf);           //--> Busca por CPF
 
 
 }

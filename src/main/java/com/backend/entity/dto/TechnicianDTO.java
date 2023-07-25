@@ -4,7 +4,7 @@ import com.backend.entity.Technician;
 import com.backend.entity.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import javax.persistence.CollectionTable;
+import java.io.Serial;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 public class TechnicianDTO implements Serializable {
 
 
+    @Serial
     private static final long serialVersionUID = 1L;
 
     protected Integer id;
@@ -29,6 +30,7 @@ public class TechnicianDTO implements Serializable {
     //?--------------------------------------------------  Constructor  ------------------------------------------------
     public TechnicianDTO() {
         super();
+        addProfile(Profile.CUSTOMER);                                                       //-> Adiciona o perfil de cliente para o técnico
     }
 
     public TechnicianDTO(Technician technicianDTO) {

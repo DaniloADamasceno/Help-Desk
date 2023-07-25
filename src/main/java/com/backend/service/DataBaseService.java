@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
+import java.util.List;
 
 @Service
 public class DataBaseService {
@@ -40,7 +41,7 @@ public class DataBaseService {
         // ADD Chamado TEST
         Called chamadoTest = new Called(null, Priority.HIGH, Status.PROGRESS, "Chamado de TEST", "Chamado TEST", clienteTest, tecnicoTest);
 
-        technicianRepository.saveAll(Arrays.asList(tecnicoTest));
+        technicianRepository.saveAll(List.of(tecnicoTest));
         clientRepository.saveAll(Arrays.asList(clienteTest));
         calledRepository.saveAll(Arrays.asList(chamadoTest));
     }
