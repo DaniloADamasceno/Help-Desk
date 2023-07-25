@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.backend.repository.repositoryTechnician;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping(value = "/technician")
@@ -36,14 +37,17 @@ public class TechnicianResources {
     //? --------------------------------------------   Methods -> End-Points  ------------------------------------------
     // FIND ALL
     @GetMapping
-    public ResponseEntity<List<Technician>> findAll() {                                                 //  --> Retorna uma lista de TODOS os Técnicos
-        List<Technician> listTechnicianFindAll = technicianRepository.findAll();
-        return ResponseEntity.ok(listTechnicianFindAll);
+    public ResponseEntity<List<TechnicianDTO>> findAll() {                                                 //  --> Retorna uma lista de TODOS os Técnicos
+        List<Technician> listTechnicianFindAll = serviceTechnician.findAll();
+        List<TechnicianDTO> listTechnicianDTO = listTechnicianFindAll.stream().map
+                (listTechnicianDTOConvert -> new TechnicianDTO(listTechnicianDTOConvert)).
+                collect(Collectors.toList());                                                   // --> Converte a lista de Técnicos para uma lista de TécnicosDTO
+        return ResponseEntity.ok(listTechnicianDTO);
     }
 
     //FIND BY ID
     @RequestMapping(value = "/{id}")
-    public ResponseEntity<TechnicianDTO> findByIdTechnician(@PathVariable Integer id) {                   //  --> Busca por ID
+    public ResponseEntity<TechnicianDTO> findByIdTechnician(@PathVariable Integer id) {                //  --> Busca por ID
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                 //--> para imprimir no console
         Technician technicianFindById = serviceTechnician.findById(id);
         return ResponseEntity.ok( new TechnicianDTO(technicianFindById));

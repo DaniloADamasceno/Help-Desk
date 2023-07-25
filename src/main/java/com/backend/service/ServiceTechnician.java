@@ -2,9 +2,12 @@ package com.backend.service;
 
 import com.backend.entity.Technician;
 import com.backend.repository.repositoryTechnician;
+import com.backend.service.exceptions.ObjectNotFoundException;
+import jdk.dynalink.linker.LinkerServices;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -19,7 +22,12 @@ public class ServiceTechnician {
     // FIND BY ID
     public Technician findById(Integer id) {
         Optional<Technician> objById = technicianRepository.findById(String.valueOf(id));
-        return objById.orElse(null);
+        return objById.orElseThrow(() -> new ObjectNotFoundException("Technician not found! / Técnico não encontrado! + id: " + id));
+    }
+
+    //FIND ALL
+    public List<Technician> findAll() {
+        return technicianRepository.findAll();
     }
 
     // FIND BY EMAIL
