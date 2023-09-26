@@ -7,15 +7,18 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/DaniloADamasceno/Help-Desk?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/DaniloADamasceno/Help-Desk?style=for-the-badge)
 
-[![wakatime](https://wakatime.com/badge/github/DaniloADamasceno/Help-Desk.svg)](https://wakatime.com/badge/github/DaniloADamasceno/Help-Desk)
+<a href="https://wakatime.com/badge/github/DaniloADamasceno/Help-Desk"><img src="https://wakatime.com/badge/github/DaniloADamasceno/Help-Desk.svg" alt="wakatime"></a>
 
 <!-- Imagem da Tela inicial do Aplicativo -->
 <div align="center">
-
-![HelpDesk01](https://github.com/DaniloADamasceno/Image-Bank/assets/71226047/f253412d-332b-499d-9fcd-060531b3165d)
-![HelpDesk02](https://github.com/DaniloADamasceno/Image-Bank/assets/71226047/5e14f413-9673-4d3e-ac0d-6264e4bd169d)
-![HelpDesk03](https://github.com/DaniloADamasceno/Image-Bank/assets/71226047/f20727a6-36f6-4c2d-8474-5ae1cd158b85)
-
+<table>
+  <tr>
+<td valign="center"><img src="https://github.com/DaniloADamasceno/Image-Bank/assets/71226047/f253412d-332b-499d-9fcd-060531b3165d"></td>
+<td valign="center"><img src="https://github.com/DaniloADamasceno/Image-Bank/assets/71226047/5e14f413-9673-4d3e-ac0d-6264e4bd169d"></td>
+<td valign="center"><img src="https://github.com/DaniloADamasceno/Image-Bank/assets/71226047/f20727a6-36f6-4c2d-8474-5ae1cd158b85"></td>
+    </tr>
+</table>
+ 
  </div>
 
 </br>
