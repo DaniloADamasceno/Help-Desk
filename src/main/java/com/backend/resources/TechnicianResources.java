@@ -10,7 +10,6 @@ import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import com.backend.repository.repositoryTechnician;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
@@ -25,7 +24,7 @@ public class TechnicianResources {
 
     //? --------------------------------------------   Methods -> End-Points  ------------------------------------------
     @Autowired
-    private repositoryTechnician technicianRepository;
+    private com.backend.repository.technicianRepository technicianRepository;
 
     @Autowired
     private ServiceTechnician serviceTechnician;
@@ -39,7 +38,7 @@ public class TechnicianResources {
     public ResponseEntity<List<TechnicianDTO>> findAll() {                                                 //  --> Retorna uma lista de TODOS os Técnicos
         List<Technician> listTechnicianFindAll = serviceTechnician.findAll();
         List<TechnicianDTO> listTechnicianDTO = listTechnicianFindAll.stream().map
-                (listTechnicianDTOConvert -> new TechnicianDTO(listTechnicianDTOConvert)).
+                (TechnicianDTO::new).
                 collect(Collectors.toList());                                                   // --> Converte a lista de Técnicos para uma lista de TécnicosDTO
         return ResponseEntity.ok(listTechnicianDTO);
     }

@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 import java.util.Optional;
 
 @Repository
-public interface repositoryTechnician extends JpaRepository<Technician, String> {
+public interface technicianRepository extends JpaRepository<Technician, String> {
 
     Optional<Technician> findByEmail(String email);       //--> Busca por EMAIL
 

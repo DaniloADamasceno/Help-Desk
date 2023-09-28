@@ -1,5 +1,6 @@
 package com.backend.resources.exceptions;
 
+import com.backend.service.exceptions.DataIntegrityViolationException;
 import com.backend.service.exceptions.ObjectNotFoundException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +18,17 @@ public class ResourcesExceptionHandler {
                 System.currentTimeMillis(),
                 HttpStatus.NOT_FOUND.value(),
                 "Object Not Found / Objeto não encontrado", xObjNotF.getMessage(),
+                request.getRequestURI());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
+    }
+
+    // DataIntegrityViolationException --> Para tratar a exceção de CPF já existente
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public ResponseEntity<StandardError> dataIntegrityViolationException(DataIntegrityViolationException dataIntegrityViolation, HttpServletRequest request) {
+        StandardError error = new StandardError(
+                System.currentTimeMillis(),
+                HttpStatus.BAD_REQUEST.value(),
+                "Data Breach / Violação de Dados", dataIntegrityViolation.getMessage(),
                 request.getRequestURI());
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }

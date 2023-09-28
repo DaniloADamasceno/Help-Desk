@@ -10,10 +10,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
+
 @Entity(name = "technicians")
 public class Technician extends Person implements Serializable {
 
-    public static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @OneToMany(mappedBy = "technician")
     private List<Called> calls = new ArrayList<>();
@@ -29,6 +30,7 @@ public class Technician extends Person implements Serializable {
         addProfile(Profile.CUSTOMER);                                                       //-> Adiciona o perfil de cliente para o técnico
 
     }
+
     public Technician(TechnicianDTO technicianDTO) {                                                //-> Construtor para converter um TechnicianDTO para um Technician
         this.id = technicianDTO.getId();
         this.name = technicianDTO.getName();

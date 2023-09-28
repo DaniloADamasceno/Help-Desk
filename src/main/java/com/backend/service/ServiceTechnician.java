@@ -1,13 +1,16 @@
 package com.backend.service;
 
+import com.backend.entity.Person;
 import com.backend.entity.Technician;
 import com.backend.entity.dto.TechnicianDTO;
-import com.backend.repository.repositoryTechnician;
+import com.backend.repository.personRepository;
 import com.backend.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 
 @Service
@@ -15,7 +18,10 @@ public class ServiceTechnician {
 
     //? --------------------------------------------   Injection Dependence  -------------------------------------------
     @Autowired
-    private repositoryTechnician technicianRepository;
+    private com.backend.repository.technicianRepository technicianRepository;
+
+    @Autowired
+    private personRepository personRepository;
 
 
     //? ------------------------------------------------   Methods  ----------------------------------------------------
@@ -39,14 +45,26 @@ public class ServiceTechnician {
     // CREATE
     public Technician create(TechnicianDTO objDTO) {
         objDTO.setId(null);                                                              //--> Para garantir que o objeto seja criado com um novo ID
+        validateCPFandEmail(objDTO);                                                     //-->  Método pra Valida o CPF e Email
         Technician newCreate = new Technician(objDTO);
         return technicianRepository.save(newCreate);
     }
 
-//    // FIND BY CPF
-//    public Technician findByCPF(String cpf) {
-//        Optional<Technician> objByCPF = technicianRepository.findByCPF(cpf);
-//        return objByCPF.orElse(null);
-//    }
+    // VALIDATE CPF AND EMAIL
+    private void validateCPFandEmail(TechnicianDTO objDTO) {
+        // Valida se o CPF já existe
+        Optional<Person> objByCPFandEmail = personRepository.findByCpf(objDTO.getCpf());
+        if (objByCPFandEmail.isPresent() && objByCPFandEmail.get().getId() != objDTO.getId()) {
+            throw new DataIntegrityViolationException("CPF already exists! / CPF já existe! " + objDTO.getCpf());
+        }
+
+        // Valida se o EMAIL já existe
+        objByCPFandEmail = personRepository.findByEmail(objDTO.getEmail());
+        if (objByCPFandEmail.isPresent() && !Objects.equals(objByCPFandEmail.get().getId(), objDTO.getId())) {
+            throw new DataIntegrityViolationException("Email already exists! / Email já existe! " + objDTO.getEmail());
+        }
+    }
+
+
 
 }
