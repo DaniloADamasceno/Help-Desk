@@ -3,6 +3,7 @@ package com.backend.entity;
 
 import com.backend.entity.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
+import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import java.io.Serializable;
@@ -23,6 +24,7 @@ public abstract class Person implements Serializable {
 
     protected String name;
 
+    @CPF
     @Column(unique = true)                                                //-> Não pode ter cpf repetido
     protected String cpf;
 

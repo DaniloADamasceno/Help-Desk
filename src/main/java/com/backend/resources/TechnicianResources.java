@@ -70,6 +70,24 @@ public class TechnicianResources {
                 //body(new TechnicianDTO(newCreateTechnician));
     }
 
+    // UPDATE
+    @PutMapping(value = "/{id}")
+    public ResponseEntity<TechnicianDTO> update(@PathVariable Integer id, @Valid @RequestBody TechnicianDTO updateTechnicianDTO) {     //  --> Atualiza um Técnico
+        Technician newUpdateTechnician = serviceTechnician.update(id, updateTechnicianDTO);
+        logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
+        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newUpdateTechnician.getId()).toUri();
+        return ResponseEntity.created(uri).build();
+                //body(new TechnicianDTO(newUpdateTechnician));
+    }
+
+    // DELETE
+    @DeleteMapping(value = "/{id}")
+    public ResponseEntity<Void> delete(@PathVariable Integer id) {     //  --> Deleta um Técnico
+        serviceTechnician.delete(id);
+        logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
+        return ResponseEntity.noContent().build();
+    }
+
 //    //FIND BY CPF
 //    @GetMapping(value = "/search")
 //    public ResponseEntity<Technician> findByCPF(@PathVariable String cpf) {                           //  --> Busca por EMAIL
