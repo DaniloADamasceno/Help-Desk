@@ -85,6 +85,8 @@ cd ../backend
 
 8. O servidor backend estará acessível em *<http://localhost:8080/>.*
 
+9. O SWAGGER estará acesssível em  *<http://localhost:8080/swagger-ui.html>*
+
 <br>
 
 ### Uso
