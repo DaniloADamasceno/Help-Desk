@@ -4,7 +4,8 @@ import com.backend.entity.Technician;
 import com.backend.entity.enums.Profile;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
-import java.io.Serial;
+
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.HashSet;
@@ -14,13 +15,20 @@ import java.util.stream.Collectors;
 public class TechnicianDTO implements Serializable {
 
 
-    @Serial
     private static final long serialVersionUID = 1L;
 
     protected Integer id;
+
+    @NotNull(message = "O campo NOME é obrigatório")    //-> Validação do campo nome
     protected String name;
+
+    @NotNull(message = "O campo CPF é obrigatório")     //-> Validação do campo CPF
     protected String cpf;
+
+    @NotNull(message = "O campo E-MAL é obrigatório")   //-> Validação do campo email
     protected String email;
+
+    @NotNull(message = "O campo SENHA é obrigatório")   //-> Validação do campo senha
     protected String password;
     protected Set<Integer> profile = new HashSet<>();
 

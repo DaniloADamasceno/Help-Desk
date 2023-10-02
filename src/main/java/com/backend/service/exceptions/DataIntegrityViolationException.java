@@ -12,4 +12,6 @@ public class DataIntegrityViolationException extends RuntimeException {
     public DataIntegrityViolationException(Throwable cause) {
         super(cause);
     }
+
+
 }

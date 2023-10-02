@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -61,7 +62,7 @@ public class TechnicianResources {
 
     //CREATE
     @PostMapping
-    public ResponseEntity<TechnicianDTO> create(@RequestBody TechnicianDTO createTechnicianDTO) {     //  --> Cria um Técnico
+    public ResponseEntity<TechnicianDTO> create(@Valid @RequestBody TechnicianDTO createTechnicianDTO) {     //  --> Cria um Técnico
         Technician newCreateTechnician = serviceTechnician.create(createTechnicianDTO);
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newCreateTechnician.getId()).toUri();
