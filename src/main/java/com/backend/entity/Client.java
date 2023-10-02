@@ -1,9 +1,11 @@
 package com.backend.entity;
 
+import com.backend.entity.dto.ClientDTO;
 import com.backend.entity.enums.Profile;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import javax.validation.Valid;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
@@ -17,7 +19,7 @@ public class Client extends Person implements Serializable {
     private List<Called> calls = new ArrayList<>();
 
     //?--------------------------------------------------  Constructor  ------------------------------------------------
-    public Client() {
+    public Client(@Valid ClientDTO updateClientDTO) {
         super();
         addProfile(Profile.CUSTOMER);
     }
