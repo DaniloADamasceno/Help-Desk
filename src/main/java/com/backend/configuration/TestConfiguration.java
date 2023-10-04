@@ -12,11 +12,12 @@ import org.springframework.context.annotation.Profile;
 public class TestConfiguration {
 
 
+    //?--------------------------------------------   INJECTIONS   -----------------------------------------------------
     @Autowired
-    private DataBaseService dataBaseService;
+    private DataBaseService serviceDataBaseTest;
 
     @Bean
     public void instantiateDataBase() {
-        this.dataBaseService.startDataBase();
+        this.serviceDataBaseTest.startDataBase();
     }
 }

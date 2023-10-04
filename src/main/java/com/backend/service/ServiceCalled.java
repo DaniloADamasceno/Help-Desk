@@ -29,24 +29,24 @@ public class ServiceCalled {
 
     //? --------------------------------------------   Methods -> End-Points  ------------------------------------------
 
-    // Find by id
+    //! FIND BY ID
     public Called findById(Integer id) {
         Optional<Called> objFindByIdCalled = repositoryCalled.findById(id);
         return objFindByIdCalled.orElseThrow(() ->
                 new RuntimeException("Id not found! Try again! | ID Não Encontrado! Tente novamente ID:  " + id));
     }
 
-    //FIND ALL
+    //! FIND ALL
     public List<Called> findAll() {
         return repositoryCalled.findAll();
     }
 
-    // CREATE
+    //! CREATE
     public Called createCalled(@Valid CalledDTO objCalledDTO) {
         return repositoryCalled.save(createNewCalled(objCalledDTO));
     }
 
-    // NEW CALLED
+    //! NEW CALLED
     public Called createNewCalled(CalledDTO objCalledDTO) {
         Technician technicianCalled = technicianService.findById(objCalledDTO.getTechnician());     //--> Busca o Técnico pelo ID
         Client clientCalled = clientService.findById(objCalledDTO.getClient());                    //--> Busca o Cliente pelo ID
@@ -55,6 +55,7 @@ public class ServiceCalled {
         if (objCalledDTO.getId() != null) {
             calledClientTechnician.setId(objCalledDTO.getId());
         }
+
         calledClientTechnician.setTechnician(technicianCalled);                                     //--> Seta o Técnico
         calledClientTechnician.setClient(clientCalled);                                             //--> Seta o Cliente
         calledClientTechnician.setDateOpened(objCalledDTO.getDateOpened());                         //--> Seta a data de abertura
@@ -65,5 +66,13 @@ public class ServiceCalled {
         calledClientTechnician.setObservation(objCalledDTO.getObservation());                       //--> Seta a observação
 
         return calledClientTechnician;
+    }
+
+    //! UPDATE
+    public Called updateCalled(Integer id, CalledDTO calledUpdate) {
+        calledUpdate.setId(id);                                                                     //--> Seta o ID
+        Called oldCalledForUpdate = findById(id);                                               //--> Busca o Chamado pelo ID
+        oldCalledForUpdate = createNewCalled(calledUpdate);                            //--> Cria um novo Chamado
+        return repositoryCalled.save(oldCalledForUpdate);                                       //--> Salva o Chamado
     }
 }

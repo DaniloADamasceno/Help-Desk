@@ -43,7 +43,8 @@ public class Called implements Serializable {
         super();
     }
 
-    public Called(Integer id, Priority priority, Status status, String title, String observation, Client client, Technician technician) {
+    public Called(Integer id, Priority priority, Status status, String title,
+                  String observation, Client client, Technician technician) {
         this.id = id;
         this.priority = priority;
         this.status = status;

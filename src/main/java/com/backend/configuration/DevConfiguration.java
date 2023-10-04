@@ -12,9 +12,9 @@ import org.springframework.context.annotation.Profile;
 @Profile("dev")
 public class DevConfiguration {
 
-
+    //?--------------------------------------------   INJECTIONS   -----------------------------------------------------
     @Autowired
-    private DataBaseService dataBaseService;
+    private DataBaseService serviceDataBaseDev;
 
     @Value("${spring.jpa.hibernate.ddl-auto}")
     private String value;
@@ -22,7 +22,7 @@ public class DevConfiguration {
     @Bean
     public boolean instantiateDataBase() {
         if (value.equals("create")) {
-            this.dataBaseService.startDataBase();
+            this.serviceDataBaseDev.startDataBase();
         }
         return false;
     }

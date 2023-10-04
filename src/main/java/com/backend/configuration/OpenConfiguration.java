@@ -14,7 +14,7 @@ public class OpenConfiguration {
                         new io.swagger.v3.oas.models.info.Info()
                                 .title("Help DESK")
                                 .version("1.0.0")
-                                .description("Help Desk com utilização da  linguagem Java com Spring Boot e Angular 12")
+                                .description("Help Desk com utilização da linguagem Java com Spring Boot e Angular 12")
                 );
     }
 }
