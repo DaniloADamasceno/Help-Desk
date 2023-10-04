@@ -39,7 +39,7 @@ public abstract class Person implements Serializable {
     @CollectionTable(name = "profile")                                    //-> Nome da tabela que vai ser criada
     protected Set<Integer> profile = new HashSet<>();
 
-    //?--------------------------------------------------  Constructor  ------------------------------------------------
+    //! -------------------------------------------------  Constructor  ------------------------------------------------
     public Person() {
         super();
         addProfile(Profile.CUSTOMER);                             //->Todos os usuários cadastrado é um cliente
@@ -54,7 +54,7 @@ public abstract class Person implements Serializable {
         addProfile(Profile.CUSTOMER);                             //->Todos os usuários cadastrado é um cliente
     }
 
-    //?--------------------------------------------------  Getters and Setters  ----------------------------------------
+    //! -------------------------------------------------  Getters and Setters  ----------------------------------------
     public Integer getId() {
         return id;
     }
@@ -111,7 +111,7 @@ public abstract class Person implements Serializable {
         this.profile.add(profile.getCod());
     }
 
-    //?-------------------------------------------------  HashCode and Equals  -----------------------------------------
+    //! ------------------------------------------------  HashCode and Equals  -----------------------------------------
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

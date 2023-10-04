@@ -18,7 +18,7 @@ public class Client extends Person implements Serializable {
     @OneToMany(mappedBy = "client")
     private List<Called> calls = new ArrayList<>();
 
-    //?--------------------------------------------------  Constructor  ------------------------------------------------
+    //! -------------------------------------------------  Constructor  ------------------------------------------------
     public Client(@Valid ClientDTO updateClientDTO) {
         super();
         addProfile(Profile.CUSTOMER);
@@ -34,7 +34,7 @@ public class Client extends Person implements Serializable {
 
     }
 
-    //?--------------------------------------------------  Getters and Setters  ----------------------------------------
+    //! -------------------------------------------------  Getters and Setters  ----------------------------------------
     public List<Called> getCalls() {
         return calls;
     }

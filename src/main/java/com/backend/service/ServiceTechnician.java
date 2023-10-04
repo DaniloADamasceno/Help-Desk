@@ -18,7 +18,7 @@ import java.util.Optional;
 @Service
 public class ServiceTechnician {
 
-    //? --------------------------------------------   Injection Dependence  -------------------------------------------
+    //! --------------------------------------------   Injection Dependence  -------------------------------------------
     @Autowired
     private TechnicianRepository repositoryTechnician;
 
@@ -26,14 +26,14 @@ public class ServiceTechnician {
     private PersonRepository repositoryPerson;
 
 
-    //? ------------------------------------------------   Methods  ----------------------------------------------------
+    //! ------------------------------------------------   Methods  ----------------------------------------------------
     // FIND BY ID
     public Technician findById(Integer id) {
         Optional<Technician> objById = repositoryTechnician.findById(String.valueOf(id));
         return objById.orElseThrow(() -> new ObjectNotFoundException("Technician not found! / Técnico não encontrado! + id: " + id));
     }
 
-    //FIND ALL
+    // FIND ALL
     public List<Technician> findAll() {
         return repositoryTechnician.findAll();
     }
@@ -66,7 +66,6 @@ public class ServiceTechnician {
             throw new DataIntegrityViolationException("Email already exists! / Email já existe! " + objDTO.getEmail());
         }
     }
-
 
     // UPDATE
     public Technician update(Integer id, @Valid TechnicianDTO updateTechnicianDTO) {

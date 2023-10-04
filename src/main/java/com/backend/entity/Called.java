@@ -38,7 +38,7 @@ public class Called implements Serializable {
     @JoinColumn(name = "technician_id")
     private Technician technician;
 
-    //?--------------------------------------------------  Constructor  ------------------------------------------------
+    //! -------------------------------------------------  Constructor  ------------------------------------------------
     public Called(CalledDTO objCalledDTO) {
         super();
     }
@@ -58,7 +58,7 @@ public class Called implements Serializable {
     }
 
 
-    //?--------------------------------------------------  Getters and Setters  ----------------------------------------
+    //! -------------------------------------------------  Getters and Setters  ----------------------------------------
     public Integer getId() {
         return id;
     }
@@ -131,7 +131,7 @@ public class Called implements Serializable {
         this.technician = technician;
     }
 
-    //?--------------------------------------------------  hashCode and equals  ----------------------------------------
+    //! -------------------------------------------------  hashCode and equals  ----------------------------------------
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

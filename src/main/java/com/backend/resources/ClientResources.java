@@ -20,14 +20,14 @@ public class ClientResources {
 
     private static final Logger logger = LoggerFactory.getLogger(ClientResources.class); //--> para imprimir no console
 
-    //? --------------------------------------------   Injection Dependence  ------------------------------------------
+    //! --------------------------------------------   Injection Dependence  ------------------------------------------
     @Autowired
     private ServiceClient clientService;
 
     @Autowired
     private Environment environment;                                                                    //--> Para imprimir no console
 
-    //? --------------------------------------------   Methods -> End-Points  ------------------------------------------
+    //! --------------------------------------------   Methods -> End-Points  ------------------------------------------
     // FIND ALL
     @GetMapping
     public ResponseEntity<List<ClientDTO>> findAll() {                                                 //  --> Retorna uma lista de TODOS os Técnicos
@@ -38,7 +38,7 @@ public class ClientResources {
         return ResponseEntity.ok(listClientDTO);
     }
 
-    //FIND BY ID
+    // FIND BY ID
     @RequestMapping(value = "/{id}")
     public ResponseEntity<ClientDTO> findByIdClient(@PathVariable Integer id) {                //  --> Busca por ID
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                 //--> para imprimir no console
@@ -46,7 +46,7 @@ public class ClientResources {
         return ResponseEntity.ok(new ClientDTO(clientFindById));
     }
 
-    //FIND BY EMAIL
+    // FIND BY EMAIL
     @GetMapping(value = "/search")
     public ResponseEntity<Client> findByEmail(@PathVariable String email) {                       //  --> Busca por EMAIL
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
@@ -54,7 +54,7 @@ public class ClientResources {
         return ResponseEntity.ok(clientFindByEmail);
     }
 
-    //CREATE
+    // CREATE
     @PostMapping
     public ResponseEntity<ClientDTO> create(@Valid @RequestBody ClientDTO createClientDTO) {     //  --> Cria um Técnico
         Client newCreateClient = clientService.create(createClientDTO);
@@ -82,11 +82,4 @@ public class ClientResources {
         return ResponseEntity.noContent().build();
     }
 
-//    //FIND BY CPF
-//    @GetMapping(value = "/search")
-//    public ResponseEntity<Client> findByCPF(@PathVariable String cpf) {                           //  --> Busca por EMAIL
-//        logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
-//        Client clientFindByCPF = serviceClient.findByCPF(cpf);
-//        return ResponseEntity.ok(clientFindByCPF);
-//    }
 }

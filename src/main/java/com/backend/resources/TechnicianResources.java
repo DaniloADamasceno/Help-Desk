@@ -22,14 +22,14 @@ public class TechnicianResources {
 
     private static final Logger logger = LoggerFactory.getLogger(TechnicianResources.class); //--> para imprimir no console
 
-    //? --------------------------------------------   Methods -> End-Points  ------------------------------------------
+    //! --------------------------------------------   Injections  -----------------------------------------------------
     @Autowired
     private ServiceTechnician technicianService;
 
     @Autowired
     private Environment environment;                                                                    //--> Para imprimir no console
 
-    //? --------------------------------------------   Methods -> End-Points  ------------------------------------------
+    //! --------------------------------------------   Methods -> End-Points  ------------------------------------------
     // FIND ALL
     @GetMapping
     public ResponseEntity<List<TechnicianDTO>> findAll() {                                                 //  --> Retorna uma lista de TODOS os Técnicos
@@ -84,11 +84,4 @@ public class TechnicianResources {
         return ResponseEntity.noContent().build();
     }
 
-//    //FIND BY CPF
-//    @GetMapping(value = "/search")
-//    public ResponseEntity<Technician> findByCPF(@PathVariable String cpf) {                           //  --> Busca por CPF
-//        logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
-//        Technician technicianFindByCPF = serviceTechnician.findByCPF(cpf);
-//        return ResponseEntity.ok(technicianFindByCPF);
-//    }
 }

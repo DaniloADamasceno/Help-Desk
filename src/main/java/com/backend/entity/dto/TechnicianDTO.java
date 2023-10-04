@@ -35,7 +35,7 @@ public class TechnicianDTO implements Serializable {
     @JsonFormat(pattern = "dd/MM/yyyy")                                   //-> Formatação da data
     protected LocalDate dateRegister = LocalDate.now();
 
-    //?--------------------------------------------------  Constructor  ------------------------------------------------
+    //! -------------------------------------------------  Constructor  ------------------------------------------------
     public TechnicianDTO() {
         super();
         addProfile(Profile.CUSTOMER);                                                       //-> Adiciona o perfil de cliente para o técnico
@@ -51,7 +51,7 @@ public class TechnicianDTO implements Serializable {
         this.dateRegister = technicianDTO.getDateRegister();
     }
 
-    //?--------------------------------------------------  Getters and Setters  ----------------------------------------
+    //! -------------------------------------------------  Getters and Setters  ----------------------------------------
 
     public Integer getId() {
         return id;

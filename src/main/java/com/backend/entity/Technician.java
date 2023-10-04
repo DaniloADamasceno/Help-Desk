@@ -19,7 +19,7 @@ public class Technician extends Person implements Serializable {
     @OneToMany(mappedBy = "technician")
     private List<Called> calls = new ArrayList<>();
 
-    //?--------------------------------------------------  Constructor  ------------------------------------------------
+    //! -------------------------------------------------  Constructor  ------------------------------------------------
     public Technician() {
         super();
         addProfile(Profile.CUSTOMER);                                                       //-> Adiciona o perfil de cliente para o técnico
@@ -41,7 +41,7 @@ public class Technician extends Person implements Serializable {
         this.dateRegister = technicianDTO.getDateRegister();
     }
 
-    //?--------------------------------------------------  Getters and Setters  ----------------------------------------
+    //! -------------------------------------------------  Getters and Setters  ----------------------------------------
     public List<Called> getCalls() {
         return calls;
     }

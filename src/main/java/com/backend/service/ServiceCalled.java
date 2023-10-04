@@ -18,7 +18,7 @@ import java.util.Optional;
 @Service
 public class ServiceCalled {
 
-    //? --------------------------------------------   Injection Dependence  -------------------------------------------
+    //! --------------------------------------------   Injection Dependence  -------------------------------------------
     @Autowired
     private CalledRepository repositoryCalled;
 
@@ -28,26 +28,26 @@ public class ServiceCalled {
     @Autowired
     private ServiceClient clientService;
 
-    //? --------------------------------------------   Methods -> End-Points  ------------------------------------------
+    //! --------------------------------------------   Methods -> End-Points  ------------------------------------------
 
-    //! FIND BY ID
+    // FIND BY ID
     public Called findById(Integer id) {
         Optional<Called> objFindByIdCalled = repositoryCalled.findById(id);
         return objFindByIdCalled.orElseThrow(() ->
                 new RuntimeException("Id not found! Try again! | ID Não Encontrado! Tente novamente ID:  " + id));
     }
 
-    //! FIND ALL
+    // FIND ALL
     public List<Called> findAll() {
         return repositoryCalled.findAll();
     }
 
-    //! CREATE
+    // CREATE
     public Called createCalled(@Valid CalledDTO objCalledDTO) {
         return repositoryCalled.save(createNewCalled(objCalledDTO));
     }
 
-    //! NEW CALLED
+    // NEW CALLED
     public Called createNewCalled(CalledDTO objCalledDTO) {
         Technician technicianCalled = technicianService.findById(objCalledDTO.getTechnician());     //--> Busca o Técnico pelo ID
         Client clientCalled = clientService.findById(objCalledDTO.getClient());                    //--> Busca o Cliente pelo ID
@@ -74,7 +74,7 @@ public class ServiceCalled {
         return calledClientTechnician;
     }
 
-    //! UPDATE
+    // UPDATE
     public Called updateCalled(Integer id, CalledDTO calledUpdate) {
         calledUpdate.setId(id);                                                                     //--> Seta o ID
         Called oldCalledForUpdate = findById(id);                                               //--> Busca o Chamado pelo ID

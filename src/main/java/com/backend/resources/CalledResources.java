@@ -25,7 +25,7 @@ public class CalledResources {
 
     private static final Logger logger = LoggerFactory.getLogger(CalledResources.class);        //  --> para imprimir no console
 
-    //? --------------------------------------------   Methods -> End-Points  ------------------------------------------
+    //! --------------------------------------------   Methods -> End-Points  ------------------------------------------
     @Autowired
     private CalledRepository repositoryCalled;
 
@@ -35,9 +35,9 @@ public class CalledResources {
     @Autowired
     private Environment environment;                                                                    //  --> Para imprimir no console
 
-    //? --------------------------------------------   Methods -> End-Points  ------------------------------------------
+    //! --------------------------------------------   Methods -> End-Points  ------------------------------------------
 
-    //! Find by id
+    // FIND BY ID
     @RequestMapping(value = "/{id}")
     public ResponseEntity<CalledDTO> findById(@PathVariable Integer id) {
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                 //--> para imprimir no console
@@ -45,7 +45,7 @@ public class CalledResources {
         return ResponseEntity.ok(new CalledDTO(calledFindById));
     }
 
-    //! FIND ALL
+    // FIND ALL
     @GetMapping
     public ResponseEntity<List<CalledDTO>> findAll() {                                                 //  --> Retorna uma lista de TODOS os Chamados
         List<Called> listCalledFindAll = repositoryCalled.findAll();
@@ -55,7 +55,7 @@ public class CalledResources {
         return ResponseEntity.ok(listCalledDTO);
     }
 
-    //! CREATE
+    // CREATE
     @PostMapping
     public ResponseEntity<CalledDTO> create(@Valid @RequestBody CalledDTO calledCreate) {              //  --> Cria um novo Chamado
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                 //  --> para imprimir no console
@@ -65,7 +65,7 @@ public class CalledResources {
         return ResponseEntity.created(uri).build();
     }
 
-    //! UPDATE
+    // UPDATE
     @PutMapping(value = "/{id}")
     public ResponseEntity<CalledDTO> update(@PathVariable Integer id, @Valid @RequestBody CalledDTO calledUpdate) { //  --> Atualiza um Chamado
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                 //--> para imprimir no console

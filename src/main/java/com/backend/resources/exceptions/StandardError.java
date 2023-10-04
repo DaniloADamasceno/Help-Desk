@@ -11,7 +11,7 @@ public class StandardError implements Serializable {
     private String message;
     private String path;
 
-    //? --------------------------------------------   Constructor  ----------------------------------------------------
+    //! --------------------------------------------   Constructor  ----------------------------------------------------
     public StandardError() {
     }
 
@@ -23,7 +23,7 @@ public class StandardError implements Serializable {
         this.path = path;
     }
 
-    //? --------------------------------------------   Getters and Setters  --------------------------------------------
+    //! --------------------------------------------   Getters and Setters  --------------------------------------------
 
     public Long getTimestamp() {
         return timestamp;

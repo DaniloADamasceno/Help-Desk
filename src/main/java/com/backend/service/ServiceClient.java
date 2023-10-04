@@ -1,10 +1,10 @@
 package com.backend.service;
 
-import com.backend.entity.Person;
 import com.backend.entity.Client;
+import com.backend.entity.Person;
 import com.backend.entity.dto.ClientDTO;
-import com.backend.repository.PersonRepository;
 import com.backend.repository.ClientRepository;
+import com.backend.repository.PersonRepository;
 import com.backend.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -18,7 +18,7 @@ import java.util.Optional;
 @Service
 public class ServiceClient {
 
-    //? --------------------------------------------   Injection Dependence  -------------------------------------------
+    //! --------------------------------------------   Injection Dependence  -------------------------------------------
     @Autowired
     private ClientRepository repositoryClient;
 
@@ -26,7 +26,7 @@ public class ServiceClient {
     private PersonRepository repositoryPerson;
 
 
-    //? ------------------------------------------------   Methods  ----------------------------------------------------
+    //! ------------------------------------------------   Methods  ----------------------------------------------------
     // FIND BY ID
     public Client findById(Integer id) {
         Optional<Client> objById = repositoryClient.findById(Integer.valueOf(String.valueOf(id)));
@@ -67,7 +67,6 @@ public class ServiceClient {
         }
     }
 
-
     // UPDATE
     public Client update(Integer id, @Valid ClientDTO updateClientDTO) {
 
@@ -86,7 +85,8 @@ public class ServiceClient {
 
         // Valida se o Técnico possui chamados
         if (!newDeleteClient.getCalls().isEmpty()) {
-            throw new DataIntegrityViolationException("Client cannot be deleted! -> Has Service Orders |  Técnico não pode ser deletado! -> Possui Ordens de Serviço" + id);
+            throw new DataIntegrityViolationException("Client cannot be deleted! -> Has Service Orders |" +
+                    "  Técnico não pode ser deletado! -> Possui Ordens de Serviço" + id);
         }
         repositoryClient.deleteById(Integer.valueOf(String.valueOf(id)));
 

@@ -8,7 +8,7 @@ public class ValidationError extends StandardError {
 
     private List<FieldMessage> errorsListValidation = new ArrayList<>();
 
-    //? -----------------------------------------   Constructor  -------------------------------------------------------
+    //! -----------------------------------------   Constructor  -------------------------------------------------------
     public ValidationError() {
         super();
     }
@@ -17,7 +17,7 @@ public class ValidationError extends StandardError {
         super(timestamp, status, error,message, path);
     }
 
-    //? -----------------------------------------   Getters and Setters  -----------------------------------------------
+    //! -----------------------------------------   Getters and Setters  -----------------------------------------------
 
 
     public List<FieldMessage> getErrorsListValidation() {
