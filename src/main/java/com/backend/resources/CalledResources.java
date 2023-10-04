@@ -19,10 +19,8 @@ import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-@RestController
-//  --> para ser um controlador Rest
-@RequestMapping(value = "/called")
-//  --> para mapear a rota
+@RestController                                                                                         //  --> Para informar que é um controlador Rest
+@RequestMapping(value = "/called")                                                                   //  --> Para informar o caminho do End-Point
 public class CalledResources {
 
     private static final Logger logger = LoggerFactory.getLogger(CalledResources.class);        //  --> para imprimir no console

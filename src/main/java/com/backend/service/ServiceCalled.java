@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
 
@@ -54,6 +55,11 @@ public class ServiceCalled {
 
         if (objCalledDTO.getId() != null) {
             calledClientTechnician.setId(objCalledDTO.getId());
+        }
+
+        // --> Se o status for igual a 2 (Fechado)
+        if (objCalledDTO.getStatus().equals(2)){                                                    //--> Se o status for igual a 2 (Fechado)
+            calledClientTechnician.setDateClosed(LocalDate.now());
         }
 
         calledClientTechnician.setTechnician(technicianCalled);                                     //--> Seta o Técnico
