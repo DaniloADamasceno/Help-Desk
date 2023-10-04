@@ -1,20 +1,17 @@
 package com.backend.repository;
 
-import com.backend.entity.Person;
+import com.backend.entity.Technician;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
 @Repository
-public interface personRepository extends JpaRepository<Person, Integer> {
-
+public interface TechnicianRepository extends JpaRepository<Technician, String> {
 
     //? --------------------------------------------   Methods   -------------------------------------------------------
-    // FIND BY CPF
-    Optional<Person> findByCpf(String cpf);
-
     // FIND BY EMAIL
-    Optional<Person> findByEmail(String email);
+    Optional<Technician> findByEmail(String email);
+
 
 }

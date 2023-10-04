@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import javax.validation.Valid;
@@ -25,10 +24,7 @@ public class TechnicianResources {
 
     //? --------------------------------------------   Methods -> End-Points  ------------------------------------------
     @Autowired
-    private com.backend.repository.technicianRepository technicianRepository;
-
-    @Autowired
-    private ServiceTechnician serviceTechnician;
+    private ServiceTechnician technicianService;
 
     @Autowired
     private Environment environment;                                                                    //--> Para imprimir no console
@@ -37,9 +33,9 @@ public class TechnicianResources {
     // FIND ALL
     @GetMapping
     public ResponseEntity<List<TechnicianDTO>> findAll() {                                                 //  --> Retorna uma lista de TODOS os Técnicos
-        List<Technician> listTechnicianFindAll = serviceTechnician.findAll();
+        List<Technician> listTechnicianFindAll = technicianService.findAll();
         List<TechnicianDTO> listTechnicianDTO = listTechnicianFindAll.stream().map
-                (TechnicianDTO::new).
+                        (TechnicianDTO::new).
                 collect(Collectors.toList());                                                   // --> Converte a lista de Técnicos para uma lista de TécnicosDTO
         return ResponseEntity.ok(listTechnicianDTO);
     }
@@ -48,49 +44,49 @@ public class TechnicianResources {
     @RequestMapping(value = "/{id}")
     public ResponseEntity<TechnicianDTO> findByIdTechnician(@PathVariable Integer id) {                //  --> Busca por ID
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                 //--> para imprimir no console
-        Technician technicianFindById = serviceTechnician.findById(id);
-        return ResponseEntity.ok( new TechnicianDTO(technicianFindById));
+        Technician technicianFindById = technicianService.findById(id);
+        return ResponseEntity.ok(new TechnicianDTO(technicianFindById));
     }
 
     //FIND BY EMAIL
     @GetMapping(value = "/search")
     public ResponseEntity<Technician> findByEmail(@PathVariable String email) {                       //  --> Busca por EMAIL
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
-        Technician technicianFindByEmail = serviceTechnician.findByEmail(email);
+        Technician technicianFindByEmail = technicianService.findByEmail(email);
         return ResponseEntity.ok(technicianFindByEmail);
     }
 
     //CREATE
     @PostMapping
     public ResponseEntity<TechnicianDTO> create(@Valid @RequestBody TechnicianDTO createTechnicianDTO) {     //  --> Cria um Técnico
-        Technician newCreateTechnician = serviceTechnician.create(createTechnicianDTO);
+        Technician newCreateTechnician = technicianService.create(createTechnicianDTO);
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newCreateTechnician.getId()).toUri();
         return ResponseEntity.created(uri).build();
-                //body(new TechnicianDTO(newCreateTechnician));
+        //body(new TechnicianDTO(newCreateTechnician));
     }
 
     // UPDATE
     @PutMapping(value = "/{id}")
     public ResponseEntity<TechnicianDTO> update(@PathVariable Integer id, @Valid @RequestBody TechnicianDTO updateTechnicianDTO) {     //  --> Atualiza um Técnico
-        Technician newUpdateTechnician = serviceTechnician.update(id, updateTechnicianDTO);
+        Technician newUpdateTechnician = technicianService.update(id, updateTechnicianDTO);
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newUpdateTechnician.getId()).toUri();
         return ResponseEntity.created(uri).build();
-                //body(new TechnicianDTO(newUpdateTechnician));
+        //body(new TechnicianDTO(newUpdateTechnician));
     }
 
     // DELETE
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {     //  --> Deleta um Técnico
-        serviceTechnician.delete(id);
+        technicianService.delete(id);
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
         return ResponseEntity.noContent().build();
     }
 
 //    //FIND BY CPF
 //    @GetMapping(value = "/search")
-//    public ResponseEntity<Technician> findByCPF(@PathVariable String cpf) {                           //  --> Busca por EMAIL
+//    public ResponseEntity<Technician> findByCPF(@PathVariable String cpf) {                           //  --> Busca por CPF
 //        logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
 //        Technician technicianFindByCPF = serviceTechnician.findByCPF(cpf);
 //        return ResponseEntity.ok(technicianFindByCPF);

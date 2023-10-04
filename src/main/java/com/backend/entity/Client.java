@@ -30,6 +30,10 @@ public class Client extends Person implements Serializable {
 
     }
 
+    public Client() {
+
+    }
+
     //?--------------------------------------------------  Getters and Setters  ----------------------------------------
     public List<Called> getCalls() {
         return calls;

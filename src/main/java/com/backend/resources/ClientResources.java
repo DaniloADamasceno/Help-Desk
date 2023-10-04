@@ -20,12 +20,9 @@ public class ClientResources {
 
     private static final Logger logger = LoggerFactory.getLogger(ClientResources.class); //--> para imprimir no console
 
-    //? --------------------------------------------   Methods -> End-Points  ------------------------------------------
+    //? --------------------------------------------   Injection Dependence  ------------------------------------------
     @Autowired
-    private com.backend.repository.clientRepository clientRepository;
-
-    @Autowired
-    private ServiceClient serviceClient;
+    private ServiceClient clientService;
 
     @Autowired
     private Environment environment;                                                                    //--> Para imprimir no console
@@ -34,7 +31,7 @@ public class ClientResources {
     // FIND ALL
     @GetMapping
     public ResponseEntity<List<ClientDTO>> findAll() {                                                 //  --> Retorna uma lista de TODOS os Técnicos
-        List<Client> listClientFindAll = serviceClient.findAll();
+        List<Client> listClientFindAll = clientService.findAll();
         List<ClientDTO> listClientDTO = listClientFindAll.stream().map
                         (ClientDTO::new).
                 collect(Collectors.toList());                                                   // --> Converte a lista de Técnicos para uma lista de TécnicosDTO
@@ -45,7 +42,7 @@ public class ClientResources {
     @RequestMapping(value = "/{id}")
     public ResponseEntity<ClientDTO> findByIdClient(@PathVariable Integer id) {                //  --> Busca por ID
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                 //--> para imprimir no console
-        Client clientFindById = serviceClient.findById(id);
+        Client clientFindById = clientService.findById(id);
         return ResponseEntity.ok(new ClientDTO(clientFindById));
     }
 
@@ -53,14 +50,14 @@ public class ClientResources {
     @GetMapping(value = "/search")
     public ResponseEntity<Client> findByEmail(@PathVariable String email) {                       //  --> Busca por EMAIL
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
-        Client clientFindByEmail = serviceClient.findByEmail(email);
+        Client clientFindByEmail = clientService.findByEmail(email);
         return ResponseEntity.ok(clientFindByEmail);
     }
 
     //CREATE
     @PostMapping
     public ResponseEntity<ClientDTO> create(@Valid @RequestBody ClientDTO createClientDTO) {     //  --> Cria um Técnico
-        Client newCreateClient = serviceClient.create(createClientDTO);
+        Client newCreateClient = clientService.create(createClientDTO);
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newCreateClient.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -70,7 +67,7 @@ public class ClientResources {
     // UPDATE
     @PutMapping(value = "/{id}")
     public ResponseEntity<ClientDTO> update(@PathVariable Integer id, @Valid @RequestBody ClientDTO updateClientDTO) {     //  --> Atualiza um Técnico
-        Client newUpdateClient = serviceClient.update(id, updateClientDTO);
+        Client newUpdateClient = clientService.update(id, updateClientDTO);
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newUpdateClient.getId()).toUri();
         return ResponseEntity.created(uri).build();
@@ -80,7 +77,7 @@ public class ClientResources {
     // DELETE
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {     //  --> Deleta um Técnico
-        serviceClient.delete(id);
+        clientService.delete(id);
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
         return ResponseEntity.noContent().build();
     }

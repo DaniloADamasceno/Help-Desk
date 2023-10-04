@@ -1,6 +1,7 @@
 package com.backend.entity;
 
 
+import com.backend.entity.dto.CalledDTO;
 import com.backend.entity.enums.Priority;
 import com.backend.entity.enums.Status;
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -13,7 +14,7 @@ import java.util.Objects;
 @Entity(name = "chamados")
 public class Called implements Serializable {
 
-    public static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)             //-> Auto incremento no banco de dados
@@ -38,7 +39,7 @@ public class Called implements Serializable {
     private Technician technician;
 
     //?--------------------------------------------------  Constructor  ------------------------------------------------
-    public Called() {
+    public Called(CalledDTO objCalledDTO) {
         super();
     }
 
@@ -50,6 +51,9 @@ public class Called implements Serializable {
         this.observation = observation;
         this.client = client;
         this.technician = technician;
+    }
+
+    public Called() {
     }
 
 

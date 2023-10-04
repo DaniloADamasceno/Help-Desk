@@ -6,8 +6,9 @@ import com.backend.entity.Technician;
 import com.backend.entity.enums.Priority;
 import com.backend.entity.enums.Profile;
 import com.backend.entity.enums.Status;
-import com.backend.repository.calledRepository;
-import com.backend.repository.clientRepository;
+import com.backend.repository.CalledRepository;
+import com.backend.repository.ClientRepository;
+import com.backend.repository.TechnicianRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +20,13 @@ public class DataBaseService {
 
     //?--------------------------------------------   INJECTIONS   -----------------------------------------------------
     @Autowired
-    private com.backend.repository.technicianRepository technicianRepository;
+    private TechnicianRepository repositoryTechnician;
 
     @Autowired
-    private clientRepository clientRepository;
+    private ClientRepository repositoryClient;
 
     @Autowired
-    private calledRepository calledRepository;
+    private CalledRepository repositoryCalled;
 
 
     public void startDataBase() {
@@ -40,8 +41,8 @@ public class DataBaseService {
         // ADD Chamado TEST
         Called chamadoTest = new Called(null, Priority.HIGH, Status.PROGRESS, "Chamado de TEST", "Chamado TEST", clienteTest, tecnicoTest);
 
-        technicianRepository.saveAll(List.of(tecnicoTest));
-        clientRepository.saveAll(Arrays.asList(clienteTest));
-        calledRepository.saveAll(Arrays.asList(chamadoTest));
+        repositoryTechnician.saveAll(List.of(tecnicoTest));
+        repositoryClient.saveAll(Arrays.asList(clienteTest));
+        repositoryCalled.saveAll(Arrays.asList(chamadoTest));
     }
 }
