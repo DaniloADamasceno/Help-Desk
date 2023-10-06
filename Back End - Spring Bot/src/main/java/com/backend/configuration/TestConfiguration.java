@@ -18,6 +18,6 @@ public class TestConfiguration {
 
     @Bean
     public void instantiateDataBase() {
-        this.serviceDataBaseTest.startDataBase();
+        this.serviceDataBaseTest.startDataBase();                           // --> Método que Inicializa o Banco de Dados
     }
 }

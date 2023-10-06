@@ -25,7 +25,7 @@ public class CalledResources {
 
     private static final Logger logger = LoggerFactory.getLogger(CalledResources.class);        //  --> para imprimir no console
 
-    //! --------------------------------------------   Methods -> End-Points  ------------------------------------------
+    //! --------------------------------------------   Dependency Injection  ------------------------------------------
     @Autowired
     private CalledRepository repositoryCalled;
 

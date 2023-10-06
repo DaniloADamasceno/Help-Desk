@@ -8,6 +8,7 @@ import com.backend.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import com.backend.repository.TechnicianRepository;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -19,11 +20,17 @@ import java.util.Optional;
 public class ServiceTechnician {
 
     //! --------------------------------------------   Injection Dependence  -------------------------------------------
-    @Autowired
-    private TechnicianRepository repositoryTechnician;
+    private final TechnicianRepository repositoryTechnician;
+    private final PersonRepository repositoryPerson;
 
     @Autowired
-    private PersonRepository repositoryPerson;
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+
+    //! -------------------------------------------------  Constructor  ------------------------------------------------
+    public ServiceTechnician(TechnicianRepository repositoryTechnician, PersonRepository repositoryPerson) {
+        this.repositoryTechnician = repositoryTechnician;
+        this.repositoryPerson = repositoryPerson;
+    }
 
 
     //! ------------------------------------------------   Methods  ----------------------------------------------------
@@ -47,6 +54,7 @@ public class ServiceTechnician {
     // CREATE
     public Technician create(TechnicianDTO objDTO) {
         objDTO.setId(null);                                                              //--> Para garantir que o objeto seja criado com um novo ID
+        objDTO.setPassword(bCryptPasswordEncoder.encode(objDTO.getPassword()));         //--> Para criptografar a senha
         validateCPFandEmail(objDTO);                                                     //-->  Método para Valida o CPF e Email
         Technician newCreate = new Technician(objDTO);
         return repositoryTechnician.save(newCreate);

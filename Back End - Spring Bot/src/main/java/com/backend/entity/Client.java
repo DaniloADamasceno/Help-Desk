@@ -13,7 +13,7 @@ import java.util.List;
 @Entity(name = "clients")
 public class Client extends Person implements Serializable {
 
-    public static final long serialVersionUID = 1L;
+    private static final long serialVersionUID = 1L;
 
     @OneToMany(mappedBy = "client")
     private List<Called> calls = new ArrayList<>();

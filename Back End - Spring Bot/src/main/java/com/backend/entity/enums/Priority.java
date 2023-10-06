@@ -4,7 +4,7 @@ package com.backend.entity.enums;
 public enum Priority {
 
     LOW(0, "PRIORIDADE_BAIXA"),
-    AVERAGE(1, "PRIORIDADE_MEDIA"),
+    MEDIUM(1, "PRIORIDADE_MEDIA"),
     HIGH(2, "PRIORIDADE_ALTA");
 
     //! -------------------------------------------------  Constructor  ------------------------------------------------

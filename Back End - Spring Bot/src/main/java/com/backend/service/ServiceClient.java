@@ -8,6 +8,7 @@ import com.backend.repository.PersonRepository;
 import com.backend.service.exceptions.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.validation.Valid;
@@ -19,11 +20,18 @@ import java.util.Optional;
 public class ServiceClient {
 
     //! --------------------------------------------   Injection Dependence  -------------------------------------------
-    @Autowired
-    private ClientRepository repositoryClient;
+    private final ClientRepository repositoryClient;
+    private final PersonRepository repositoryPerson;
 
     @Autowired
-    private PersonRepository repositoryPerson;
+    private  BCryptPasswordEncoder bCryptPasswordEncoder;
+
+
+    //! -------------------------------------------------  Constructor  ------------------------------------------------
+    public ServiceClient(ClientRepository repositoryClient, PersonRepository repositoryPerson) {
+        this.repositoryClient = repositoryClient;
+        this.repositoryPerson = repositoryPerson;
+    }
 
 
     //! ------------------------------------------------   Methods  ----------------------------------------------------
@@ -47,6 +55,7 @@ public class ServiceClient {
     // CREATE
     public Client create(ClientDTO objDTO) {
         objDTO.setId(null);                                                              //--> Para garantir que o objeto seja criado com um novo ID
+        objDTO.setPassword(bCryptPasswordEncoder.encode(objDTO.getPassword()));         //--> Para criptografar a senha
         validateCPFandEmail(objDTO);                                                     //-->  Método para Valida o CPF e Email
         Client newCreate = new Client(objDTO);
         return repositoryClient.save(newCreate);
@@ -69,7 +78,6 @@ public class ServiceClient {
 
     // UPDATE
     public Client update(Integer id, @Valid ClientDTO updateClientDTO) {
-
         updateClientDTO.setId(id);
         Client newUpdate = findById(id);
         validateCPFandEmail(updateClientDTO);                                                     //-->  Método para Valida o CPF e Email

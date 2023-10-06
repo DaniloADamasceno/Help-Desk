@@ -20,7 +20,7 @@ public class ClientResources {
 
     private static final Logger logger = LoggerFactory.getLogger(ClientResources.class); //--> para imprimir no console
 
-    //! --------------------------------------------   Injection Dependence  ------------------------------------------
+    //! --------------------------------------------   Dependency Injection  -------------------------------------------
     @Autowired
     private ServiceClient clientService;
 

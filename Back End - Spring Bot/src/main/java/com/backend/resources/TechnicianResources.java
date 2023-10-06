@@ -22,7 +22,7 @@ public class TechnicianResources {
 
     private static final Logger logger = LoggerFactory.getLogger(TechnicianResources.class); //--> para imprimir no console
 
-    //! --------------------------------------------   Injections  -----------------------------------------------------
+    //! --------------------------------------------   Dependency Injection  -------------------------------------------
     @Autowired
     private ServiceTechnician technicianService;
 
