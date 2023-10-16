@@ -5,6 +5,7 @@ import com.backend.entity.Called;
 import com.backend.entity.dto.CalledDTO;
 import com.backend.repository.CalledRepository;
 import com.backend.service.ServiceCalled;
+import javassist.tools.rmi.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -57,7 +58,7 @@ public class CalledResources {
 
     // CREATE
     @PostMapping
-    public ResponseEntity<CalledDTO> create(@Valid @RequestBody CalledDTO calledCreate) {              //  --> Cria um novo Chamado
+    public ResponseEntity<CalledDTO> create(@Valid @RequestBody CalledDTO calledCreate) throws ObjectNotFoundException {              //  --> Cria um novo Chamado
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                 //  --> para imprimir no console
         Called newCalledCreate = calledService.createCalled(calledCreate);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
@@ -67,7 +68,7 @@ public class CalledResources {
 
     // UPDATE
     @PutMapping(value = "/{id}")
-    public ResponseEntity<CalledDTO> update(@PathVariable Integer id, @Valid @RequestBody CalledDTO calledUpdate) { //  --> Atualiza um Chamado
+    public ResponseEntity<CalledDTO> update(@PathVariable Integer id, @Valid @RequestBody CalledDTO calledUpdate) throws ObjectNotFoundException { //  --> Atualiza um Chamado
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                 //--> para imprimir no console
         Called newCalledUpdate = calledService.updateCalled(id, calledUpdate);
         return ResponseEntity.ok(new CalledDTO(newCalledUpdate));

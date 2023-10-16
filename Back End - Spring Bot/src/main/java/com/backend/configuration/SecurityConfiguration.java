@@ -1,11 +1,13 @@
 package com.backend.configuration;
 
 import com.backend.security.JWTAuthenticationFilter;
+import com.backend.security.JWTAuthorizationFilter;
 import com.backend.security.JWTUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.core.env.Environment;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -19,6 +21,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import java.util.Arrays;
 
 @EnableWebSecurity
+@EnableGlobalMethodSecurity(prePostEnabled=true)                                                     // --> Permite que o back-end seja acessado por perfis específicos
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     private static final String[] PUBLIC_MATCHERS = {"/h2-console/**"};                              // --> Permite o acesso ao Banco H2
@@ -43,6 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
         http.cors().and().csrf().disable();                                                          // --> Método que permite que o front-end acesse o back-end
         http.addFilter(new JWTAuthenticationFilter(authenticationManager(), utilJWT)); // --> Método que permite que o front-end acesse o back-end
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), utilJWT, userDetailsService)); // --> Método que permite que o front-end acesse o back-end
 
         http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll().
                 anyRequest().authenticated();                                                        // --> Permite o acesso ao Banco H2
@@ -51,7 +55,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(userDetailsService()).passwordEncoder(bCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(bCryptPasswordEncoder());
     }
 
     //! --------------------------------------------   METHODS  e BEANS ------------------------------------------------

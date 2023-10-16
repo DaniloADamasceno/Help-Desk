@@ -3,11 +3,13 @@ package com.backend.resources;
 import com.backend.entity.Technician;
 import com.backend.entity.dto.TechnicianDTO;
 import com.backend.service.ServiceTechnician;
+import javassist.tools.rmi.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
@@ -42,7 +44,7 @@ public class TechnicianResources {
 
     //FIND BY ID
     @RequestMapping(value = "/{id}")
-    public ResponseEntity<TechnicianDTO> findByIdTechnician(@PathVariable Integer id) {                //  --> Busca por ID
+    public ResponseEntity<TechnicianDTO> findByIdTechnician(@PathVariable Integer id) throws ObjectNotFoundException {                //  --> Busca por ID
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                 //--> para imprimir no console
         Technician technicianFindById = technicianService.findById(id);
         return ResponseEntity.ok(new TechnicianDTO(technicianFindById));
@@ -57,6 +59,7 @@ public class TechnicianResources {
     }
 
     //CREATE
+    @PreAuthorize("hasAnyRole('ADMIN')")                                                             //--> Permite que apenas o ADMIN crie um Técnico
     @PostMapping
     public ResponseEntity<TechnicianDTO> create(@Valid @RequestBody TechnicianDTO createTechnicianDTO) {     //  --> Cria um Técnico
         Technician newCreateTechnician = technicianService.create(createTechnicianDTO);
@@ -67,8 +70,9 @@ public class TechnicianResources {
     }
 
     // UPDATE
+    @PreAuthorize("hasAnyRole('ADMIN')")                                                             //--> Permite que apenas o ADMIN atualize um Técnico
     @PutMapping(value = "/{id}")
-    public ResponseEntity<TechnicianDTO> update(@PathVariable Integer id, @Valid @RequestBody TechnicianDTO updateTechnicianDTO) {     //  --> Atualiza um Técnico
+    public ResponseEntity<TechnicianDTO> update(@PathVariable Integer id, @Valid @RequestBody TechnicianDTO updateTechnicianDTO) throws ObjectNotFoundException {     //  --> Atualiza um Técnico
         Technician newUpdateTechnician = technicianService.update(id, updateTechnicianDTO);
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newUpdateTechnician.getId()).toUri();
@@ -77,8 +81,9 @@ public class TechnicianResources {
     }
 
     // DELETE
+    @PreAuthorize("hasAnyRole('ADMIN')")                                                             //--> Permite que apenas o ADMIN delete um Técnico
     @DeleteMapping(value = "/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {     //  --> Deleta um Técnico
+    public ResponseEntity<Void> delete(@PathVariable Integer id) throws ObjectNotFoundException {     //  --> Deleta um Técnico
         technicianService.delete(id);
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
         return ResponseEntity.noContent().build();

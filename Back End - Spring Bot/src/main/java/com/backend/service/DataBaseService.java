@@ -7,8 +7,7 @@ import com.backend.entity.enums.Priority;
 import com.backend.entity.enums.Profile;
 import com.backend.entity.enums.Status;
 import com.backend.repository.CalledRepository;
-import com.backend.repository.ClientRepository;
-import com.backend.repository.TechnicianRepository;
+import com.backend.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -19,21 +18,17 @@ import java.util.List;
 @Service
 public class DataBaseService {
 
-    //! -------------------------------------------   Dependency Injection   --------------------------------------------
-    private final TechnicianRepository repositoryTechnician;
+    //! -------------------------------------------   Dependency Injection   -------------------------------------------
+    @Autowired
+    private  CalledRepository repositoryCalled;
 
-    private final ClientRepository repositoryClient;
+    @Autowired
+    private PersonRepository repositoryPerson;
 
-    private final CalledRepository repositoryCalled;
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    public DataBaseService(TechnicianRepository repositoryTechnician, ClientRepository repositoryClient, CalledRepository repositoryCalled, BCryptPasswordEncoder bCryptPasswordEncoder) {
-        this.repositoryTechnician = repositoryTechnician;
-        this.repositoryClient = repositoryClient;
-        this.repositoryCalled = repositoryCalled;
-        this.bCryptPasswordEncoder = bCryptPasswordEncoder;
-    }
 
 
     public void startDataBase() {
@@ -81,9 +76,9 @@ public class DataBaseService {
         Called chamado6 = new Called(null, Priority.LOW, Status.OPEN, "Chamado N° 2023.0006",
                 "Baixa --> ABERTO", cliente3, tecnico2);
 
-        // SAVE
-        repositoryTechnician.saveAll(List.of(tecnicoTest, tecnico1, tecnico2, tecnico3, tecnico4, tecnico5));
-        repositoryClient.saveAll(Arrays.asList(clienteTest, cliente1, cliente2, cliente3, cliente4, cliente5));
-        repositoryCalled.saveAll(List.of(chamadoTest, chamado1, chamado2, chamado3, chamado4, chamado5, chamado6));
+        // * SAVE
+        repositoryPerson.saveAll(List.of(tecnicoTest, tecnico1, tecnico2, tecnico3, tecnico4, tecnico5)); // --> Salva os Técnicos
+        repositoryPerson.saveAll(Arrays.asList(clienteTest, cliente1, cliente2, cliente3, cliente4, cliente5));                     // --> Salva os Clientes
+        repositoryCalled.saveAll(List.of(chamadoTest, chamado1, chamado2, chamado3, chamado4, chamado5, chamado6)); // --> Salva os Chamados
     }
 }

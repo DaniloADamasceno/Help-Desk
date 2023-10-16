@@ -20,7 +20,7 @@ public class DevConfiguration {
     private String value;
 
     @Bean
-    public boolean instantiateDataBase() {
+    public boolean startDataBase() {
         if (value.equals("create")) {
             this.serviceDataBaseDev.startDataBase();
         }

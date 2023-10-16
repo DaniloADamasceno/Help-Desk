@@ -7,6 +7,7 @@ import com.backend.entity.dto.CalledDTO;
 import com.backend.entity.enums.Priority;
 import com.backend.entity.enums.Status;
 import com.backend.repository.CalledRepository;
+import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -30,25 +31,34 @@ public class ServiceCalled {
 
     //! --------------------------------------------   Methods -> End-Points  ------------------------------------------
 
-    // FIND BY ID
+    // * FIND BY ID
     public Called findById(Integer id) {
         Optional<Called> objFindByIdCalled = repositoryCalled.findById(id);
         return objFindByIdCalled.orElseThrow(() ->
                 new RuntimeException("Id not found! Try again! | ID Não Encontrado! Tente novamente ID:  " + id));
     }
 
-    // FIND ALL
+    // * FIND ALL
     public List<Called> findAll() {
         return repositoryCalled.findAll();
     }
 
-    // CREATE
-    public Called createCalled(@Valid CalledDTO objCalledDTO) {
+    // * CREATE
+    public Called createCalled(@Valid CalledDTO objCalledDTO) throws ObjectNotFoundException {
         return repositoryCalled.save(createNewCalled(objCalledDTO));
     }
 
-    // NEW CALLED
-    public Called createNewCalled(CalledDTO objCalledDTO) {
+    // * UPDATE
+    public Called updateCalled(Integer id, CalledDTO calledUpdate) throws ObjectNotFoundException {
+        calledUpdate.setId(id);                                                                     //--> Seta o ID
+        Called oldCalledForUpdate = findById(id);                                               //--> Busca o Chamado pelo ID
+        oldCalledForUpdate = createNewCalled(calledUpdate);                            //--> Cria um novo Chamado
+        return repositoryCalled.save(oldCalledForUpdate);                                       //--> Salva o Chamado
+    }
+
+
+    // * NEW CALLED
+    public Called createNewCalled(CalledDTO objCalledDTO) throws ObjectNotFoundException {
         Technician technicianCalled = technicianService.findById(objCalledDTO.getTechnician());     //--> Busca o Técnico pelo ID
         Client clientCalled = clientService.findById(objCalledDTO.getClient());                    //--> Busca o Cliente pelo ID
         Called calledClientTechnician = new Called();                                                  //--> Instancia um novo objeto do tipo Chamado
@@ -57,7 +67,7 @@ public class ServiceCalled {
             calledClientTechnician.setId(objCalledDTO.getId());
         }
 
-        // --> Se o status for igual a 2 (Fechado)
+        // *--> Se o status for igual a 2 (Fechado)
         if (objCalledDTO.getStatus().equals(2)){                                                    //--> Se o status for igual a 2 (Fechado)
             calledClientTechnician.setDateClosed(LocalDate.now());
         }
@@ -74,11 +84,5 @@ public class ServiceCalled {
         return calledClientTechnician;
     }
 
-    // UPDATE
-    public Called updateCalled(Integer id, CalledDTO calledUpdate) {
-        calledUpdate.setId(id);                                                                     //--> Seta o ID
-        Called oldCalledForUpdate = findById(id);                                               //--> Busca o Chamado pelo ID
-        oldCalledForUpdate = createNewCalled(calledUpdate);                            //--> Cria um novo Chamado
-        return repositoryCalled.save(oldCalledForUpdate);                                       //--> Salva o Chamado
-    }
+
 }

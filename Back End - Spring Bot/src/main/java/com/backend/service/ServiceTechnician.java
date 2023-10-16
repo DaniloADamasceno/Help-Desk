@@ -4,7 +4,7 @@ import com.backend.entity.Person;
 import com.backend.entity.Technician;
 import com.backend.entity.dto.TechnicianDTO;
 import com.backend.repository.PersonRepository;
-import com.backend.service.exceptions.ObjectNotFoundException;
+import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import com.backend.repository.TechnicianRepository;
@@ -34,24 +34,24 @@ public class ServiceTechnician {
 
 
     //! ------------------------------------------------   Methods  ----------------------------------------------------
-    // FIND BY ID
-    public Technician findById(Integer id) {
+    // * FIND BY ID
+    public Technician findById(Integer id) throws ObjectNotFoundException {
         Optional<Technician> objById = repositoryTechnician.findById(String.valueOf(id));
         return objById.orElseThrow(() -> new ObjectNotFoundException("Technician not found! / Técnico não encontrado! + id: " + id));
     }
 
-    // FIND ALL
+    // * FIND ALL
     public List<Technician> findAll() {
         return repositoryTechnician.findAll();
     }
 
-    // FIND BY EMAIL
+    // * FIND BY EMAIL
     public Technician findByEmail(String email) {
         Optional<Technician> objByEmail = repositoryTechnician.findByEmail(email);
         return objByEmail.orElse(null);
     }
 
-    // CREATE
+    // * CREATE
     public Technician create(TechnicianDTO objDTO) {
         objDTO.setId(null);                                                              //--> Para garantir que o objeto seja criado com um novo ID
         objDTO.setPassword(bCryptPasswordEncoder.encode(objDTO.getPassword()));         //--> Para criptografar a senha
@@ -60,7 +60,7 @@ public class ServiceTechnician {
         return repositoryTechnician.save(newCreate);
     }
 
-    // VALIDATE CPF AND EMAIL
+    // * VALIDATE CPF AND EMAIL
     private void validateCPFandEmail(TechnicianDTO objDTO) {
         // Valida se o CPF já existe
         Optional<Person> objByCPFandEmail = repositoryPerson.findByCpf(objDTO.getCpf());
@@ -76,7 +76,7 @@ public class ServiceTechnician {
     }
 
     // UPDATE
-    public Technician update(Integer id, @Valid TechnicianDTO updateTechnicianDTO) {
+    public Technician update(Integer id, @Valid TechnicianDTO updateTechnicianDTO) throws ObjectNotFoundException {
 
         updateTechnicianDTO.setId(id);
         Technician newUpdate = findById(id);
@@ -87,13 +87,14 @@ public class ServiceTechnician {
     }
 
     // DELETE
-    public void delete(Integer id) {
+    public void delete(Integer id) throws ObjectNotFoundException {
 
         Technician newDeleteTechnician = findById(id);
 
         // Valida se o Técnico possui chamados
         if (!newDeleteTechnician.getCalls().isEmpty()) {
-            throw new DataIntegrityViolationException("Technician cannot be deleted! -> Has Service Orders |  Técnico não pode ser deletado! -> Possui Ordens de Serviço" + id);
+            throw new DataIntegrityViolationException("Technician cannot be deleted! -> Has Service Orders |  " +
+                    "Técnico não pode ser deletado! -> Possui Ordens de Serviço" + id);
         }
         repositoryTechnician.deleteById(String.valueOf(id));
 

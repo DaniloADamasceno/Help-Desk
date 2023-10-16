@@ -5,7 +5,7 @@ import com.backend.entity.Person;
 import com.backend.entity.dto.ClientDTO;
 import com.backend.repository.ClientRepository;
 import com.backend.repository.PersonRepository;
-import com.backend.service.exceptions.ObjectNotFoundException;
+import javassist.tools.rmi.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -20,39 +20,34 @@ import java.util.Optional;
 public class ServiceClient {
 
     //! --------------------------------------------   Injection Dependence  -------------------------------------------
-    private final ClientRepository repositoryClient;
-    private final PersonRepository repositoryPerson;
+    @Autowired
+    private ClientRepository repositoryClient;
+
+    @Autowired
+    private PersonRepository repositoryPerson;
 
     @Autowired
     private  BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
-    //! -------------------------------------------------  Constructor  ------------------------------------------------
-    public ServiceClient(ClientRepository repositoryClient, PersonRepository repositoryPerson) {
-        this.repositoryClient = repositoryClient;
-        this.repositoryPerson = repositoryPerson;
-    }
-
-
     //! ------------------------------------------------   Methods  ----------------------------------------------------
-    // FIND BY ID
-    public Client findById(Integer id) {
+    // * FIND BY ID
+    public Client findById(Integer id) throws ObjectNotFoundException {
         Optional<Client> objById = repositoryClient.findById(Integer.valueOf(String.valueOf(id)));
         return objById.orElseThrow(() -> new ObjectNotFoundException("Client not found! / Técnico não encontrado! + id: " + id));
     }
 
-    //FIND ALL
+    // * FIND ALL
     public List<Client> findAll() {
         return repositoryClient.findAll();
     }
 
-    // FIND BY EMAIL
+    // * FIND BY EMAIL
     public Client findByEmail(String email) {
         Optional<Client> objByEmail = repositoryClient.findByEmail(email);
         return objByEmail.orElse(null);
     }
 
-    // CREATE
+    // * CREATE
     public Client create(ClientDTO objDTO) {
         objDTO.setId(null);                                                              //--> Para garantir que o objeto seja criado com um novo ID
         objDTO.setPassword(bCryptPasswordEncoder.encode(objDTO.getPassword()));         //--> Para criptografar a senha
@@ -61,7 +56,7 @@ public class ServiceClient {
         return repositoryClient.save(newCreate);
     }
 
-    // VALIDATE CPF AND EMAIL
+    // * VALIDATE CPF AND EMAIL
     private void validateCPFandEmail(ClientDTO objDTO) {
         // Valida se o CPF já existe
         Optional<Person> objByCPFandEmail = repositoryPerson.findByCpf(objDTO.getCpf());
@@ -69,15 +64,15 @@ public class ServiceClient {
             throw new DataIntegrityViolationException("CPF already exists! / CPF já existe! " + objDTO.getCpf());
         }
 
-        // Valida se o EMAIL já existe
+        // * Valida se o EMAIL já existe
         objByCPFandEmail = repositoryPerson.findByEmail(objDTO.getEmail());
         if (objByCPFandEmail.isPresent() && !Objects.equals(objByCPFandEmail.get().getId(), objDTO.getId())) {
             throw new DataIntegrityViolationException("Email already exists! / Email já existe! " + objDTO.getEmail());
         }
     }
 
-    // UPDATE
-    public Client update(Integer id, @Valid ClientDTO updateClientDTO) {
+    // * UPDATE
+    public Client update(Integer id, @Valid ClientDTO updateClientDTO) throws ObjectNotFoundException {
         updateClientDTO.setId(id);
         Client newUpdate = findById(id);
         validateCPFandEmail(updateClientDTO);                                                     //-->  Método para Valida o CPF e Email
@@ -86,12 +81,12 @@ public class ServiceClient {
 
     }
 
-    // DELETE
-    public void delete(Integer id) {
+    // * DELETE
+    public void delete(Integer id) throws ObjectNotFoundException {
 
         Client newDeleteClient = findById(id);
 
-        // Valida se o Técnico possui chamados
+        // * Valida se o Técnico possui chamados
         if (!newDeleteClient.getCalls().isEmpty()) {
             throw new DataIntegrityViolationException("Client cannot be deleted! -> Has Service Orders |" +
                     "  Técnico não pode ser deletado! -> Possui Ordens de Serviço" + id);

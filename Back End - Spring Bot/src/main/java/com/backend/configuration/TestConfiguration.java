@@ -17,7 +17,7 @@ public class TestConfiguration {
     private DataBaseService serviceDataBaseTest;
 
     @Bean
-    public void instantiateDataBase() {
+    public void startDataBase() {
         this.serviceDataBaseTest.startDataBase();                           // --> Método que Inicializa o Banco de Dados
     }
 }
