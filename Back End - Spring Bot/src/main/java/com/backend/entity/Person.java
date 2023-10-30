@@ -36,7 +36,7 @@ public abstract class Person implements Serializable {
     protected LocalDate dateRegister = LocalDate.now();
 
     @ElementCollection(fetch = FetchType.EAGER)                           //-> Garante que não vai repetir o mesmo valor
-    @CollectionTable(name = "profile")                                    //-> Nome da tabela que vai ser criada
+    @CollectionTable(name = "PROFILE")                                    //-> Nome da tabela que vai ser criada
     protected Set<Integer> profile = new HashSet<>();
 
     //! -------------------------------------------------  Constructor  ------------------------------------------------

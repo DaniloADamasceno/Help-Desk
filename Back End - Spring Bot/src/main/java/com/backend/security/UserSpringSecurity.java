@@ -10,13 +10,12 @@ import java.util.Collection;
 import java.util.Set;
 import java.util.stream.Collectors;
 
-public class UserSpringSecurity  implements UserDetails {
+public class UserSpringSecurity implements UserDetails {
 
     private static final long serialVersionUID = 1L;
 
     @Getter
     private Integer id;
-
     private String email;
     private String password;
     private Collection<? extends GrantedAuthority> authorities;

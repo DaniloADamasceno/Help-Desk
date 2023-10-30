@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Arrays;
-import java.util.List;
 
 @Service
 public class DataBaseService {
@@ -28,13 +27,11 @@ public class DataBaseService {
     @Autowired
     private BCryptPasswordEncoder bCryptPasswordEncoder;
 
-
-
-
+    //! ------------------------------------------------   Methods  ----------------------------------------------------
     public void startDataBase() {
 
         // ADD Perfil de ADMIN para o Técnico TEST
-        Technician tecnicoTest = new Technician(null, "Tecnico TEST", "00000000011", "TecnicoTEST@Gmail.com", bCryptPasswordEncoder.encode("123456"));
+        Technician tecnicoTest = new Technician(null, "Tecnico TEST", "00000000000", "TecnicoTEST@Gmail.com", bCryptPasswordEncoder.encode("123456"));
         tecnicoTest.addProfile(Profile.ADMIN);
 
         // ADD Perfis de Técnicos
@@ -77,8 +74,8 @@ public class DataBaseService {
                 "Baixa --> ABERTO", cliente3, tecnico2);
 
         // * SAVE
-        repositoryPerson.saveAll(List.of(tecnicoTest, tecnico1, tecnico2, tecnico3, tecnico4, tecnico5)); // --> Salva os Técnicos
-        repositoryPerson.saveAll(Arrays.asList(clienteTest, cliente1, cliente2, cliente3, cliente4, cliente5));                     // --> Salva os Clientes
-        repositoryCalled.saveAll(List.of(chamadoTest, chamado1, chamado2, chamado3, chamado4, chamado5, chamado6)); // --> Salva os Chamados
+        repositoryPerson.saveAll(Arrays.asList(tecnicoTest, tecnico1, tecnico2, tecnico3, tecnico4, tecnico5)); // --> Salva os Técnicos
+        repositoryPerson.saveAll(Arrays.asList(clienteTest, cliente1, cliente2, cliente3, cliente4, cliente5)); // --> Salva os Clientes
+        repositoryCalled.saveAll(Arrays.asList(chamadoTest, chamado1, chamado2, chamado3, chamado4, chamado5, chamado6)); // --> Salva os Chamados
     }
 }

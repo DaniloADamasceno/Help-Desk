@@ -14,12 +14,10 @@ public class ValidationError extends StandardError {
     }
 
     public ValidationError(Long timestamp, Integer status, String error, String message, String path) {
-        super(timestamp, status, error,message, path);
+        super(timestamp, status, error, message, path);
     }
 
     //! -----------------------------------------   Getters and Setters  -----------------------------------------------
-
-
     public List<FieldMessage> getErrorsListValidation() {
         return errorsListValidation;
     }

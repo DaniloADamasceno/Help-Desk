@@ -5,7 +5,6 @@ import com.backend.entity.Called;
 import com.backend.entity.dto.CalledDTO;
 import com.backend.repository.CalledRepository;
 import com.backend.service.ServiceCalled;
-import javassist.tools.rmi.ObjectNotFoundException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +16,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.validation.Valid;
 import java.net.URI;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RestController                                                                                         //  --> Para informar que é um controlador Rest
@@ -39,10 +37,10 @@ public class CalledResources {
     //! --------------------------------------------   Methods -> End-Points  ------------------------------------------
 
     // FIND BY ID
-    @RequestMapping(value = "/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<CalledDTO> findById(@PathVariable Integer id) {
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                 //--> para imprimir no console
-        Optional<Called> calledFindById = repositoryCalled.findById(id);
+        Called calledFindById = calledService.findById(id);
         return ResponseEntity.ok(new CalledDTO(calledFindById));
     }
 
@@ -53,25 +51,25 @@ public class CalledResources {
         List<CalledDTO> listCalledDTO = listCalledFindAll.stream().map
                         (CalledDTO::new).
                 collect(Collectors.toList());                                               //  --> Converte a lista de Chamados para uma lista de CalledDTO
-        return ResponseEntity.ok(listCalledDTO);
+        return ResponseEntity.ok().body(listCalledDTO);
     }
 
-    // CREATE
+    // * --> CREATE
     @PostMapping
-    public ResponseEntity<CalledDTO> create(@Valid @RequestBody CalledDTO calledCreate) throws ObjectNotFoundException {              //  --> Cria um novo Chamado
+    public ResponseEntity<CalledDTO> create(@Valid @RequestBody CalledDTO calledCreate){              //  --> Cria um novo Chamado
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                 //  --> para imprimir no console
         Called newCalledCreate = calledService.createCalled(calledCreate);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}")
-                .buildAndExpand(calledCreate.getId()).toUri();
+                .buildAndExpand(newCalledCreate.getId()).toUri();
         return ResponseEntity.created(uri).build();
     }
 
-    // UPDATE
+    // * --> UPDATE
     @PutMapping(value = "/{id}")
-    public ResponseEntity<CalledDTO> update(@PathVariable Integer id, @Valid @RequestBody CalledDTO calledUpdate) throws ObjectNotFoundException { //  --> Atualiza um Chamado
+    public ResponseEntity<CalledDTO> update(@PathVariable Integer id, @Valid @RequestBody CalledDTO calledUpdate) { //  --> Atualiza um Chamado
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                 //--> para imprimir no console
         Called newCalledUpdate = calledService.updateCalled(id, calledUpdate);
-        return ResponseEntity.ok(new CalledDTO(newCalledUpdate));
+        return ResponseEntity.ok().body(new CalledDTO(newCalledUpdate));
     }
 
 }

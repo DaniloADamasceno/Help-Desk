@@ -7,11 +7,11 @@ import com.backend.entity.dto.CalledDTO;
 import com.backend.entity.enums.Priority;
 import com.backend.entity.enums.Status;
 import com.backend.repository.CalledRepository;
-import javassist.tools.rmi.ObjectNotFoundException;
+import com.backend.service.exceptions.ObjectNotFoundException;
+import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import javax.validation.Valid;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Optional;
@@ -35,7 +35,7 @@ public class ServiceCalled {
     public Called findById(Integer id) {
         Optional<Called> objFindByIdCalled = repositoryCalled.findById(id);
         return objFindByIdCalled.orElseThrow(() ->
-                new RuntimeException("Id not found! Try again! | ID Não Encontrado! Tente novamente ID:  " + id));
+                new ObjectNotFoundException("Id not found! Try again! | ID Não Encontrado! Tente novamente ID:  " + id));
     }
 
     // * FIND ALL
@@ -44,12 +44,13 @@ public class ServiceCalled {
     }
 
     // * CREATE
-    public Called createCalled(@Valid CalledDTO objCalledDTO) throws ObjectNotFoundException {
+    @SneakyThrows
+    public Called createCalled(CalledDTO objCalledDTO)  {
         return repositoryCalled.save(createNewCalled(objCalledDTO));
     }
 
     // * UPDATE
-    public Called updateCalled(Integer id, CalledDTO calledUpdate) throws ObjectNotFoundException {
+    public Called updateCalled(Integer id, CalledDTO calledUpdate){
         calledUpdate.setId(id);                                                                     //--> Seta o ID
         Called oldCalledForUpdate = findById(id);                                               //--> Busca o Chamado pelo ID
         oldCalledForUpdate = createNewCalled(calledUpdate);                            //--> Cria um novo Chamado
@@ -58,7 +59,8 @@ public class ServiceCalled {
 
 
     // * NEW CALLED
-    public Called createNewCalled(CalledDTO objCalledDTO) throws ObjectNotFoundException {
+    @SneakyThrows
+    public Called createNewCalled(CalledDTO objCalledDTO) {
         Technician technicianCalled = technicianService.findById(objCalledDTO.getTechnician());     //--> Busca o Técnico pelo ID
         Client clientCalled = clientService.findById(objCalledDTO.getClient());                    //--> Busca o Cliente pelo ID
         Called calledClientTechnician = new Called();                                                  //--> Instancia um novo objeto do tipo Chamado

@@ -24,7 +24,8 @@ import java.util.Arrays;
 @EnableGlobalMethodSecurity(prePostEnabled=true)                                                     // --> Permite que o back-end seja acessado por perfis específicos
 public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
-    private static final String[] PUBLIC_MATCHERS = {"/h2-console/**"};                              // --> Permite o acesso ao Banco H2
+    private static final String[] PUBLIC_MATCHERS = { "/h2-console/**" };                        // --> Permite o acesso ao Banco H2
+   // private static final String[] PUBLIC_MATCHERS_SWAGGER = {"/swagger-ui.html/**"};           // --> Permite acesso ao Swagger
 
     //! --------------------------------------------   Dependency Injection  -------------------------------------------
     @Autowired
@@ -35,6 +36,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Autowired
     private UserDetailsService userDetailsService;
+    @Autowired
+    private JWTUtil jwtUtil;
     //! --------------------------------------------   FUNCTIONS  ------------------------------------------------------
 
     @Override
@@ -45,11 +48,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         }
 
         http.cors().and().csrf().disable();                                                          // --> Método que permite que o front-end acesse o back-end
-        http.addFilter(new JWTAuthenticationFilter(authenticationManager(), utilJWT)); // --> Método que permite que o front-end acesse o back-end
-        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), utilJWT, userDetailsService)); // --> Método que permite que o front-end acesse o back-end
-
+        http.addFilter(new JWTAuthenticationFilter(authenticationManager(), jwtUtil)); // --> Método que permite que o front-end acesse o back-end
+        http.addFilter(new JWTAuthorizationFilter(authenticationManager(), jwtUtil, userDetailsService)); // --> Método que permite que o front-end acesse o back-end
         http.authorizeRequests().antMatchers(PUBLIC_MATCHERS).permitAll().
                 anyRequest().authenticated();                                                        // --> Permite o acesso ao Banco H2
+//        http.authorizeRequests().antMatchers(PUBLIC_MATCHERS_SWAGGER).permitAll()
+//                .anyRequest().authenticated();                                                       // --> Permite acesso ao Swagger
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
@@ -62,7 +66,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Bean
     CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration().applyPermitDefaultValues();       // --> Método que permite que o front-end acesse o back-end
-        configuration.setAllowedMethods(Arrays.asList("DELETE", "POST","GET","PUT"));               // --> Libera os Acessos
+        configuration.setAllowedMethods(Arrays.asList("DELETE", "POST","GET","PUT", "OPTIONS"));    // --> Libera os Acessos
         final UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);                               // --> Libera os Acessos
         return source;

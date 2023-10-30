@@ -2,19 +2,21 @@ package com.backend.security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
-import io.jsonwebtoken.SignatureAlgorithm;
 
 import java.util.Date;
 
 @Component
 public class JWTUtil {
 
-    @Value("${jwt.expiration}")                                                              // *--> Pega o valor da variável de ambiente do Application.properties
+    // *--> Pega o valor da variável de ambiente do Application.properties
+    @Value("${jwt.expiration}")
     private Long expiration;
 
-    @Value("${jwt.secret}")                                                                  // *--> Pega o valor da variável de ambiente do Application.properties
+    // *--> Pega o valor da variável de ambiente do Application.properties
+    @Value("${jwt.secret}")
     private String secret;
 
     public String generateToken(String email) {
@@ -51,10 +53,10 @@ public class JWTUtil {
 
     public String getUsername(String token) {
 
-            Claims claims = getClaims(token);
-            if (claims != null) {
-                return claims.getSubject();                                                             // *--> Retorna o usuário
-            }
-            return null;
+        Claims claims = getClaims(token);
+        if (claims != null) {
+            return claims.getSubject();                                                             // *--> Retorna o usuário
+        }
+        return null;
     }
 }

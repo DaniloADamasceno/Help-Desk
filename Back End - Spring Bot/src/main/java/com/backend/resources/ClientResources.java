@@ -28,8 +28,10 @@ public class ClientResources {
     @Autowired
     private Environment environment;                                                                    //--> Para imprimir no console
 
+
     //! --------------------------------------------   Methods -> End-Points  ------------------------------------------
-    // FIND ALL
+
+    // * --> FIND ALL
     @GetMapping
     public ResponseEntity<List<ClientDTO>> findAll() {                                                 //  --> Retorna uma lista de TODOS os Técnicos
         List<Client> listClientFindAll = clientService.findAll();
@@ -39,47 +41,37 @@ public class ClientResources {
         return ResponseEntity.ok(listClientDTO);
     }
 
-    // FIND BY ID
-    @RequestMapping(value = "/{id}")
-    public ResponseEntity<ClientDTO> findByIdClient(@PathVariable Integer id) throws ObjectNotFoundException {                //  --> Busca por ID
+    // * --> FIND BY ID
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<ClientDTO> findByIdClient(@PathVariable Integer id) {                //  --> Busca por ID
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                 //--> para imprimir no console
         Client clientFindById = clientService.findById(id);
-        return ResponseEntity.ok(new ClientDTO(clientFindById));
+        return ResponseEntity.ok().body(new ClientDTO(clientFindById));
     }
 
-    // FIND BY EMAIL
-    @GetMapping(value = "/search")
-    public ResponseEntity<Client> findByEmail(@PathVariable String email) {                       //  --> Busca por EMAIL
-        logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
-        Client clientFindByEmail = clientService.findByEmail(email);
-        return ResponseEntity.ok(clientFindByEmail);
-    }
 
-    // CREATE
+    // * --> CREATE
     @PostMapping
     public ResponseEntity<ClientDTO> create(@Valid @RequestBody ClientDTO createClientDTO) {     //  --> Cria um Técnico
-        Client newCreateClient = clientService.create(createClientDTO);
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
+        Client newCreateClient = clientService.create(createClientDTO);
         URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newCreateClient.getId()).toUri();
         return ResponseEntity.created(uri).build();
-        //body(new ClientDTO(newCreateClient));
     }
 
-    // UPDATE
+    // * --> UPDATE
     @PutMapping(value = "/{id}")
-    public ResponseEntity<ClientDTO> update(@PathVariable Integer id, @Valid @RequestBody ClientDTO updateClientDTO) throws ObjectNotFoundException {     //  --> Atualiza um Técnico
-        Client newUpdateClient = clientService.update(id, updateClientDTO);
+    public ResponseEntity<ClientDTO> update(@PathVariable Integer id, @Valid @RequestBody ClientDTO updateClientDTO) {     //  --> Atualiza um Técnico
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
-        URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(newUpdateClient.getId()).toUri();
-        return ResponseEntity.created(uri).build();
-        //body(new ClientDTO(newUpdateClient));
+        Client newUpdateClient = clientService.update(id, updateClientDTO);
+        return ResponseEntity.ok().body(new ClientDTO(newUpdateClient));
     }
 
-    // DELETE
+    // * --> DELETE
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) throws ObjectNotFoundException {     //  --> Deleta um Técnico
-        clientService.delete(id);
         logger.info("PORT / PORTA = " + environment.getProperty("local.server.port"));                //--> para imprimir no console
+        clientService.delete(id);
         return ResponseEntity.noContent().build();
     }
 

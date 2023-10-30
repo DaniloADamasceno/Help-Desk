@@ -24,7 +24,7 @@ public class ResourcesExceptionHandler {
         return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
     }
 
-    // DataIntegrityViolationException --> Para tratar a exceção de CPF já existente
+    // * --> DataIntegrityViolationException --> Para tratar a exceção de CPF já existente
     @ExceptionHandler(DataIntegrityViolationException.class)
     public ResponseEntity<StandardError> dataIntegrityViolationException(DataIntegrityViolationException dataIntegrityViolation, HttpServletRequest request) {
         StandardError error = new StandardError(

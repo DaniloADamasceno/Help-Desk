@@ -5,7 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
-public class OpenConfiguration {
+public class OpenSwaggerConfiguration {
 
     @Bean
     public OpenAPI customOpenAPI() {            // link para acessar o SWAGGER: http://localhost:8080/swagger-ui.html

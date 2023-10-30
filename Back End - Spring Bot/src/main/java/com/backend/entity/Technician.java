@@ -2,6 +2,7 @@ package com.backend.entity;
 
 import com.backend.entity.dto.TechnicianDTO;
 import com.backend.entity.enums.Profile;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
@@ -16,6 +17,7 @@ public class Technician extends Person implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
+    @JsonIgnore
     @OneToMany(mappedBy = "technician")
     private List<Called> calls = new ArrayList<>();
 
