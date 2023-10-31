@@ -31,14 +31,16 @@ import { MatCardModule } from '@angular/material/card';
 
 // Componentes do projeto
 import { NavgationComponent as NavigationComponent } from './componets/navigation/navigation.component';
-import { HomeComponent } from './componets/home/home.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
+
     NavigationComponent,
     HomeComponent
+
   ],
   imports: [
     BrowserModule,
