@@ -33,10 +33,14 @@ import { MatCardModule } from '@angular/material/card';
 import { NavgationComponent as NavigationComponent } from './componets/navigation/navigation.component';
 
 
+
 @NgModule({
   declarations: [
     AppComponent,
-    NavigationComponent
+
+    NavigationComponent,
+    HomeComponent
+
   ],
   imports: [
     BrowserModule,

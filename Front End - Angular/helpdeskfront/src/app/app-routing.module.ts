@@ -3,8 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 
 import { NavgationComponent } from './componets/navigation/navigation.component';
 
+import { HomeComponent } from './componets/home/home.component';
+
 const routes: Routes = [
-  {path: '', component: NavgationComponent}
+  {path: '', component: NavgationComponent, children: [
+    {path: 'home', component: HomeComponent}  // Navegação para a página home -> Página Filha 
+  ]
+}
+
 ];
 
 
