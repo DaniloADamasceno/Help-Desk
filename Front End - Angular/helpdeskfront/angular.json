@@ -10,8 +10,10 @@
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
+
           "inlineTemplate": false,
           "inlineStyle": false,
+
           "skipTests": true
         },
         "@schematics/angular:class": {
@@ -53,7 +55,9 @@
               "src/assets"
             ],
             "styles": [
+
               "./node_modules/@angular/material/prebuilt-themes/pink-bluegrey.css",
+
               "src/styles.css"
             ],
             "scripts": []
