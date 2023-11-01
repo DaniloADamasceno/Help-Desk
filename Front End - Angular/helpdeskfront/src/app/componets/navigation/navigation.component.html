@@ -2,10 +2,12 @@
   <mat-drawer #drawer class="sidenav" mode="side">
     <img src="assets/img/side-image.svg" alt="Imagem de navegação" />
     <mat-nav-list class="nav-list">
+
+<!-- Link de Navegação para a HOME -->
       <a mat-list-item routerLink="home">
-        <i class="material-icons">home</i>Home</a
-      >
-      <a mat-list-item routerLink="/">
+        <i class="material-icons">home</i>Home</a>  
+        <!-- Link de Navegação para os Técnicos -->
+     <a mat-list-item routerLink="technician">
         <i class="material-icons">account_circle</i> Técnicos</a
       >
       <a mat-list-item routerLink="/">
@@ -30,3 +32,5 @@
 
   </div>
 </mat-drawer-container>
+
+

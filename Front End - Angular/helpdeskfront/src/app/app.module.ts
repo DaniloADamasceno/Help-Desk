@@ -30,15 +30,19 @@ import { MatListModule } from '@angular/material/list';
 import { MatCardModule } from '@angular/material/card';
 
 // Componentes do projeto
-import { NavgationComponent as NavigationComponent } from './componets/navigation/navigation.component';
+import { NavigationComponent as NavigationComponent } from './componets/navigation/navigation.component';
 import { HomeComponent } from './componets/home/home.component';
+import { HeaderComponent } from './componets/header/header.component';
+import { TechnicianListComponent } from './componets/technician/technician-list/technician-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     NavigationComponent,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent,
+    TechnicianListComponent,
   ],
   imports: [
     BrowserModule,
@@ -67,18 +71,9 @@ import { HomeComponent } from './componets/home/home.component';
     MatIconModule,
     MatListModule,
     MatCardModule,
-
-
-@NgModule({
-  declarations: [
-    AppComponent
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule
-
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+
+export class AppModule {}

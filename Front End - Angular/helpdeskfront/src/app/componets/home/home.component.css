@@ -1,9 +1,10 @@
 .card {
     width: 90%;
-    margin: auto;
+    margin:  2rem auto;
 }
 
 img{
     width: 20rem;
     margin: auto 25rem auto 20rem;
 }
+

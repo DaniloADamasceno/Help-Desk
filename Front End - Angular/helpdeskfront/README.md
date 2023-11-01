@@ -25,3 +25,9 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+
+## Error Server 
+If the server displays the error error:0308010C, enter the code and then start the server normally
+Run  
+`export NODE_OPTIONS=--openssl-legacy-provider`

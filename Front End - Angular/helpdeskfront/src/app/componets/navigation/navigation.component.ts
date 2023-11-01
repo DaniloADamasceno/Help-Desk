@@ -6,7 +6,7 @@ import { Router } from '@angular/router';
   templateUrl: './navigation.component.html',       // O arquivo HTML
   styleUrls: ['./navigation.component.css']         // O arquivo CSS
 })
-export class NavgationComponent implements OnInit {
+export class NavigationComponent implements OnInit {
 
   constructor(private router: Router) { }
 
@@ -15,7 +15,4 @@ export class NavgationComponent implements OnInit {
     this.router.navigate(['/home']);                // Navegação para a página home
 
   }
-
-
-
 }
