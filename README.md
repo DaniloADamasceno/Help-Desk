@@ -111,10 +111,10 @@ c
 
 ## Stack utilizada
 
-**Front-end:** 
+**Front-end:** ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white "Badge Angular")
 
-**Back-end:**  ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white)
-               ![SpringBoot](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white)
+**Back-end:**  ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white "Badge Java")
+![SpringBoot](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white "Badge Spring Boot")
 
 ## Autores
 
@@ -128,6 +128,20 @@ ________________________________________________________________________________
 
 # Atualizações de Projeto e suas Versões
 
+*Atualização* 1.2.0 :
+> Desenvolvimento do Front-End.
+> FRONT-END em desenvolvimento.
+> --> **PROJETO EM DESENVOLVIMENTO.**
+</br>
+
+*Atualização* 1.1.0 :
+> Desenvolvimento do Back-End.
+> BACK-END Concluido.
+> --> **PROJETO EM DESENVOLVIMENTO.**
+</br>
+
 *Atualização* 1.0.0 :
 > Criação do Projeto e o seu Readme.
         > --> **PROJETO EM DESENVOLVIMENTO.**
+</br>
+
