@@ -7,3 +7,16 @@ img{
     width: 20rem;
     margin: auto 25rem auto 20rem;
 }
+
+a {
+    font-family: Arial Black;
+    font-size: 20px;
+    letter-spacing: 0px;
+    word-spacing: 0px;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: none;
+    font-style: italic;
+    font-variant: normal;
+    text-transform: capitalize;
+}
