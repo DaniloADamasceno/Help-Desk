@@ -9,6 +9,8 @@
 
 [![wakatime](https://wakatime.com/badge/github/DaniloADamasceno/Help-Desk.svg)](https://wakatime.com/badge/github/DaniloADamasceno/Help-Desk)
 
+[![Repository Views](https://komarev.com/ghpvc/?username=DaniloADamascenoHelp&label=Views&color=brightgreen)](https://github.com/DaniloADamasceno/Help-Desk)
+
 <!-- Imagem da Tela inicial do Aplicativo -->
 <div align="center">
 
@@ -21,7 +23,7 @@
 </br>
 </br>
 
-## Descrição do Projeto
+### 📃 Descrição do Projeto
 
 </br>
 
@@ -31,7 +33,7 @@
 </br>
 </br>
 
-## Pré-requisitos
+## 📋 Pré-requisitos
 
 Antes de começar, certifique-se de ter as seguintes ferramentas e tecnologias instaladas em seu ambiente de desenvolvimento:
 
@@ -40,9 +42,9 @@ Antes de começar, certifique-se de ter as seguintes ferramentas e tecnologias i
 **Java**: A linguagem de programação Java para desenvolvimento backend.
 **Spring Boot**: Um framework Java para criar aplicativos web e APIs RESTful.
 
-## Instalação
+## 🚀 Instalação
 
-Siga estas etapas para configurar e executar o projeto:
+Essas instruções permitirão que você obtenha uma cópia do projeto em operação na sua máquina local para fins de desenvolvimento e teste.
 
 1. Clone o repositório do GitHub:
 
@@ -87,7 +89,7 @@ cd ../backend
 
 <br>
 
-### Uso
+### ▶️ Uso
 
 - Acesse a interface do usuário do Help Desk em *http://localhost:4200/* e registre uma conta de usuário.
 - Faça login com a conta criada e registre solicitações de suporte.
@@ -95,7 +97,7 @@ cd ../backend
 
 <br>
 
-### Contribuição
+## 📦 Contribuição
 
 Este é um projeto de código aberto e estou aberto a contribuições da comunidade.
 Se desejar contribuir para este projeto, siga estas etapas:
@@ -107,41 +109,50 @@ Se desejar contribuir para este projeto, siga estas etapas:
 5. Envie para o branch principal do repositório original: *git push origin main*.
 6. Abra um pull request no GitHub.
 
-c
+</br>
+</br>
 
-## Stack utilizada
+## 🛠️ Stack utilizadas
 
-**Front-end:** ![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white "Badge Angular")
+**Front-end:** 
 
-**Back-end:**  ![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white "Badge Java")
+![Angular](https://img.shields.io/badge/Angular-DD0031?style=for-the-badge&logo=angular&logoColor=white "Badge Angular")
+
+**Back-end:**  
+
+![Java](https://img.shields.io/badge/Java-ED8B00?style=for-the-badge&logo=openjdk&logoColor=white "Badge Java")
 ![SpringBoot](https://img.shields.io/badge/Spring-6DB33F?style=for-the-badge&logo=spring&logoColor=white "Badge Spring Boot")
 
-## Autores
 
-- [@Danilo A. Damasceno](https://github.com/DaniloADamasceno/)
+## ✒️ Autores
 
-</br>
-</br>
-</br>
+Mencione todos aqueles que ajudaram a levantar o projeto desde o seu início
 
-________________________________________________________________________________________________________________________________________________________________
+* **Desenvolvedor** -  [@Danilo A. Damasceno](https://github.com/DaniloADamasceno/)
+* **Documentação** -   [@Danilo A. Damasceno](https://github.com/DaniloADamasceno/)
 
-# Atualizações de Projeto e suas Versões
 
-*Atualização* 1.2.0 :
-> Desenvolvimento do Front-End.
-> FRONT-END em desenvolvimento.
-> --> **PROJETO EM DESENVOLVIMENTO.**
-</br>
+</br></br></br>
+</hr>
 
-*Atualização* 1.1.0 :
-> Desenvolvimento do Back-End.
-> BACK-END Concluido.
-> --> **PROJETO EM DESENVOLVIMENTO.**
+## 📄 Atualizações de Projeto e suas Versões
+
+
+### **Atualização**: 1.2.0:
+
+- Desenvolvimento do Back-End.
+- FRONT-END em desenvolvimento / BACK-END concluído.
+- --> **PROJETO EM DESENVOLVIMENTO.**
 </br>
 
-*Atualização* 1.0.0 :
-> Criação do Projeto e o seu Readme.
-        > --> **PROJETO EM DESENVOLVIMENTO.**
+- Desenvolvimento do Back-End.
+- BACK-END concluído.
+- --> **PROJETO EM DESENVOLVIMENTO.**
 </br>
+
+- Criação do Projeto e o seu Readme.
+- BACK-END em desenvolvimento.
+- --> **PROJETO EM DESENVOLVIMENTO.**
+</br>
+
 
